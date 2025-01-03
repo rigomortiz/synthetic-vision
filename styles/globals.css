@@ -1,36 +1,80 @@
 html,
 body {
-  background-color: #f8fafc;
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
-    Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+	padding: 0;
+	margin: 0;
+	background-color: black;
 }
 
-* {
-  box-sizing: border-box;
+.p5Canvas {
+	position: absolute !important;
+	z-index: 1;
+	height: 100vh;
+	width: 100vw;
 }
 
-main {
-  padding: 5rem 0;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+canvas {
+	position: absolute !important;
+	z-index: -1;
+	height: 100vh;
+	width: 100vw;
 }
 
-code {
-  background: #e2e8f0;
-  border-radius: 5px;
-  padding: 0.75rem;
-  font-family: Menlo, Monaco, Lucida Console, Courier New, monospace;
+/* Estilo de las barras de desplazamiento */
+*::-webkit-scrollbar {
+	width: 1px;
+	height: 1px;
 }
 
-.container {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+*::-webkit-scrollbar-track {
+	background: #000000; /* Fondo negro */
+}
+
+*::-webkit-scrollbar-thumb {
+	background: #00ff00; /* Color verde estilo Matrix */
+	border-radius: 1px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+	background: #00cc00; /* Color verde más oscuro al pasar el ratón */
+}
+
+
+.cm-theme {
+	position: absolute !important;
+	z-index: 2;
+	font-family: monospace;
+	font-size: 14px;
+	width: 33vw;
+	height: 100vh;
+	overflow-x: auto;
+	word-wrap: break-word;
+	cursor: url(http://www.rw-designer.com/cursor-extern.php?id=144650), auto;
+}
+
+.close-button {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	background-color: red;
+	color: white;
+	border: none;
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	cursor: url(http://www.rw-designer.com/cursor-extern.php?id=144648), auto;
+	z-index: 3;
+}
+
+.run-button {
+	position: absolute;
+	top: 10px;
+	right: 50px;
+	background-color: greenyellow;
+	color: white;
+	border: none;
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	cursor: url(http://www.rw-designer.com/cursor-extern.php?id=144648), auto;
+	z-index: 3;
 }
