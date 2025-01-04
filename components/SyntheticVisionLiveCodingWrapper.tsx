@@ -80,6 +80,9 @@ const SyntheticVisionLiveCodingWrapper: React.FC<SyntheticVisionLiveCodingProps>
 	useEffect(() => {
 		if (p5Instance && hydraInstance) {
 			try {
+				hydraInstance.update = () => {
+			        p5Instance.redraw();
+			    }
 				liveCoding(p5Instance, hydraInstance, syntheticVision);
 			} catch (e) {
 				console.error(e);

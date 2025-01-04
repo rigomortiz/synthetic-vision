@@ -2,15 +2,12 @@ import SyntheticVisionAbstract from "../../src/SyntheticVisionAbstract";
 import * as p5 from "p5";
 // @ts-ignore
 import Hydra from "hydra-synth";
-import {Fonts} from "../../src/enums/Fonts";
 
 class Jan1SV extends SyntheticVisionAbstract {
     preload(p: p5): void {
     }
     setup(p: p5, h: Hydra): void {
 		p.describe('A Init');
-		p.textAlign(p.CENTER, p.CENTER);
-	    p.textFont(this.font(Fonts.Volunmo));
 		p.pixelDensity(2)
     }
     draw(p: p5): void {
@@ -28,7 +25,7 @@ class Jan1SV extends SyntheticVisionAbstract {
     }
 
     hydra(h: Hydra, p: p5, active: boolean): void {
-		h.src(h.s0)
+		 h.src(h.s0)//.osc(10, 0.1, 1.5)
 			//.modulate(h.noise(3), 0.5)
 	        .add(h.src(h.o0).scale(()=> p.tan(h.time/2)), .5)
 	        .modulateScale(h.noise(1000), .01)

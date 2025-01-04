@@ -1,7 +1,4 @@
 (p, h, sv) => {
-    h.update = () => {
-        p.redraw();
-    }
     p.draw = () => {
         let numLines = 10;
 		p.clear()
