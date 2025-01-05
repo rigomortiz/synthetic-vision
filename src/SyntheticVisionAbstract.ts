@@ -137,6 +137,15 @@ abstract class SyntheticVisionAbstract {
   get canvas(): p5.Renderer {
     return this._canvas;
   }
+
+  hide(): void {
+    this.canvas.hide();
+  }
+
+  show(): void {
+    this.canvas.show();
+  }
+
 }
 
 export default SyntheticVisionAbstract;

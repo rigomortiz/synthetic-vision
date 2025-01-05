@@ -69,7 +69,6 @@ class Jan3SV extends SyntheticVisionAbstract {
             .modulateScale(h.noise(.42), .42)
             .add(h.src(h.o0).scale(()=> p.tan( h.time*.42)), .42)
             //.modulateScale(h.noise(4.2).modulate(h.noise(-.42), -0.42), 4.2)
-
             .out(h.o0)
     }
 
