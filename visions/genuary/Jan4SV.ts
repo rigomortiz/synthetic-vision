@@ -40,11 +40,10 @@ class Jan4SV extends SyntheticVisionAbstract {
 	         .modulate(h.noise(100), 0.3)
 	        .add(h.src(h.o0).scale(()=> p.exp(h.time*2)), 2)
 	        .scale(100)
-	        .brightness([-.1,.1].smooth().fast(.3))
+	        .brightness(0).color(0.5,0.5,0.5)
 	        .diff(h.src(h.o0).scale(10))
 	        .modulateScale(h.osc(2).modulateRotate(h.o0,.74))
-	        .diff(h.src(h.o0).rotate([-.012,.01,-.002,0]).scrollY(0,[-1/200,0].fast(0.7)))
-	        .brightness([-.1,.1].smooth().fast(.3))
+	        .diff(h.src(h.o0).rotate([-.012,.01,-.002,0]))
         .out(h.o0)
 
 		h.render(h.o0);
