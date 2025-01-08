@@ -49,7 +49,7 @@ const SyntheticVisionLiveCodingWrapper: React.FC<SyntheticVisionLiveCodingProps>
 
 			p5Instance.setup = () => {
 				syntheticVision.initialize(p5Instance, h);
-				alert('Press Play to start the animation');
+				//alert('Press Play to start the animation');
 			}
 
 			h.update = () => {
