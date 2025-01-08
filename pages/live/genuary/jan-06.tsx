@@ -7,20 +7,21 @@ import p5 from "p5";
 import SyntheticVisionAbstract from "../../../src/SyntheticVisionAbstract";
 import styles from "../../../styles/Home.module.css";
 import CodeMirrorEditor from "../../../components/CodeMirrorEditor";
-import Jan6SV from "../../../visions/genuary/Jan6SV";
+import Jan5SV from "../../../visions/genuary/Jan5SV";
 
 const SyntheticVisionLiveCodingWrapper: ComponentType<SyntheticVisionLiveCodingProps> =
-	dynamic((): Promise<{default: ComponentType<SyntheticVisionLiveCodingProps>}> =>
+	dynamic((): Promise<{ default: ComponentType<SyntheticVisionLiveCodingProps> }> =>
 		import("../../../components/SyntheticVisionLiveCodingWrapper"), {
 		ssr: false
 	})
 
-const sv: Jan6SV = new Jan6SV()
-const fileName = 'jan-06.js';
+const sv: Jan5SV = new Jan5SV()
+const fileName = 'jan-05.js';
 
 export default function Home() {
 	const [code, setCode] = useState("");
-	const [vision, setVision] = useState<((p: p5, h: Hydra, sv: SyntheticVisionAbstract) => void)>(() => {});
+	const [vision, setVision] = useState<((p: p5, h: Hydra, sv: SyntheticVisionAbstract) => void)>(() => {
+	});
 
 	const handleCodeChange = useCallback((code: string) => {
 		setCode(code);

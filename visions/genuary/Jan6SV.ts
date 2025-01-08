@@ -3,184 +3,202 @@ import * as p5 from "p5";
 // @ts-ignore
 import Hydra from "hydra-synth";
 
-class Jan6SV extends SyntheticVisionAbstract {
-	title: string = "Make a landscape using only primitive shapes.";
-	text: [string, string, string, string] = [
-		"INTRODUCTION",
-		"SPACE IS BIG. REALLY IS BIG.",
-		"YOU JUST WON'T BELIEVE HOW VASTLY, HUGELY,",
-		"MIND-BOGGLINGLY BIG IT IS"
-	]
-	COLORS: { [key: string]: string } = {
-		CYAN: '#00FFFF',
-		MAGENTA: '#FF00FF',
-		BLUE: '#0000FF',
-		ELECTRIC_BLUE: '#7DF9FF',
-		NEON_PINK: '#FF6EC7',
-		NEON_GREEN: '#39FF14',
-		DARK_GREEN: '#0B3D0B',
-		GRAY: '#808080',
-		NEON_YELLOW: '#FFFF33',
-		PURPLE: '#800080',
-		WHITE: '#FFFFFF',
-		RED: '#FF0000',
-		GREEN: '#00FF00',
-		BLACK: "#000000"
-	};
-	angle: number = 1;
-	c: number = 1
-	x: number = 0;
-	y: number = 0;
-	cubeSize: number = 0;
-	planetSize: number = 0;
-	satelliteSize: number = 0;
-	ellipseHeight: number = 0;
-	ellipseWidth: number = 0;
-	semiMajorAxis: number = 0;
-	semiMinorAxis: number = 0;
+const COLORS = {
+	DARK_GREEN: '#0B3D0B',
+	LIGHT_GREEN: '#00FF00',
+	YELLOW: '#FFFF00',
+	ORANGE: '#FFA500',
+	RED: '#FF0000',
+	BLUE: '#0000FF',
+	WHITE: '#FFFFFF',
+	BLACK: '#000000'
+};
 
+class Node {
+	x: number;
+	y: number;
+	radius: number;
+	connected: boolean;
+
+	constructor(x: number, y: number, radius: number, connected: boolean) {
+		this.x = x;
+		this.y = y;
+		this.radius = radius;
+		this.connected = connected
+	}
+
+	draw(p: p5): void {
+		if (this.connected) {
+			p.fill(COLORS.ORANGE);
+			p.stroke(10)
+			p.strokeWeight(2)
+			p.circle(this.x, this.y, this.radius * 2);
+		}
+
+	}
+}
+
+class Chip {
+	x: number;
+	y: number;
+	size: number;
+	nodesCount: number;
+	nodeSize: number;
+	nodesInput: Node[];
+	nodesOutput: Node[];
+	lines: Node[][];
+
+	constructor(p: p5, x: number, y: number, size: number, nodesCount: number, nodeSize: number) {
+		this.x = x;
+		this.y = y;
+		this.size = size;
+		this.nodesCount = nodesCount;
+		this.nodeSize = nodeSize;
+		this.nodesInput = [];
+		this.nodesOutput = [];
+		this.lines = [];
+
+		// Initialize nodes as Node
+		for (let i = 0; i < this.nodesCount; i++) {
+			//if (i<5 || i>35) continue
+
+			let nodeUpInput = new Node(this.x + this.nodeSize + i * this.nodeSize * 2, this.y - this.nodeSize, this.nodeSize, true);
+			let nodeUpOutput = new Node(this.x + this.nodeSize + i * this.nodeSize * 2, p.random(-this.size, this.y - this.size / 3), this.nodeSize, p.random([true, false]));
+
+
+			let nodeDownInput = new Node(this.x + this.nodeSize + i * this.nodeSize * 2, this.y + this.size + this.nodeSize, this.nodeSize, true);
+			let nodeDownOutput = new Node(this.x + this.nodeSize + i * this.nodeSize * 2, p.random(this.y + this.size + this.size / 3, p.height + this.size), this.nodeSize, p.random([true, false]));
+
+
+			let nodeLeftInput = new Node(this.x - this.nodeSize, this.y + i * this.nodeSize * 2 + this.nodeSize, this.nodeSize, true);
+			let nodeLeftOutput = new Node(p.random(-this.size, this.x - this.size / 3), this.y + i * this.nodeSize * 2 + this.nodeSize, this.nodeSize, p.random([true, false]));
+
+
+			let nodeRightInput = new Node(this.x + this.size + this.nodeSize, this.y + i * this.nodeSize * 2 + this.nodeSize, this.nodeSize, true);
+			let nodeRightOutput = new Node(p.random(this.x + this.size + this.size / 3, p.width + this.size), this.y + i * this.nodeSize * 2 + this.nodeSize, this.nodeSize, p.random([true, false]));
+
+			this.nodesInput.push(nodeUpInput);
+			this.nodesInput.push(nodeDownInput);
+			this.nodesInput.push(nodeLeftInput);
+			this.nodesInput.push(nodeRightInput);
+
+
+			this.nodesOutput.push(nodeUpOutput);
+			this.nodesOutput.push(nodeDownOutput);
+			this.nodesOutput.push(nodeLeftOutput);
+			this.nodesOutput.push(nodeRightOutput);
+			this.lines.push([nodeUpInput, nodeUpOutput]);
+			this.lines.push([nodeDownInput, nodeDownOutput]);
+			this.lines.push([nodeLeftInput, nodeLeftOutput]);
+			this.lines.push([nodeRightInput, nodeRightOutput]);
+		}
+	}
+
+	draw(p: p5): void {
+		p.fill(0, 0, 0, 10);
+		p.rect(this.x, this.y, this.size, this.size);
+
+		for (let node of this.nodesInput) {
+			p.fill(COLORS.LIGHT_GREEN);
+			p.stroke(10)
+			p.strokeWeight(2)
+			node.draw(p);
+		}
+
+		for (let node of this.nodesOutput) {
+			node.draw(p);
+		}
+
+		for (let line of this.lines) {
+			if (line[0].connected && line[1].connected) {
+				p.stroke(COLORS.YELLOW);
+				p.strokeWeight(1)
+				p.line(line[0].x, line[0].y, line[1].x, line[1].y);
+			} else {
+				//p.stroke(COLORS.DARK_GREEN);
+				//p.strokeWeight(5)
+				//p.line(line[0].x, line[0].y, line[1].x, line[1].y);
+			}
+
+		}
+
+		p.stroke(COLORS.BLACK)
+		p.strokeWeight(2)
+		p.line(this.x, this.y, this.x, this.y + this.size);
+		p.line(this.x, this.y, this.x + this.size, this.y);
+		p.line(this.x + this.size, this.y, this.x + this.size, this.y + this.size);
+		p.line(this.x, this.y + this.size, this.x + this.size, this.y + this.size);
+
+	}
+}
+
+class Jan5SV extends SyntheticVisionAbstract {
+	title: string = "Isometric Art (No vanishing points)."
+	chip1: Chip | undefined;
+	chip2: Chip | undefined;
 
 	constructor() {
-		super(true, "webgl");
+		super(true, "p2d");
 	}
 
 	preload(p: p5): void {
+
 	}
 
 	setup(p: p5, h: Hydra): void {
-		p.debugMode();
-		p.pixelDensity(1)
-		p.camera(-p.width / 2, -p.height / 2, p.sqrt(p.height * p.height + p.width * p.width) / 2, 0, 0, 0, 0, 1, 0);
-		p.angleMode(p.DEGREES);
-
-		this.cubeSize = p.sqrt(p.height * p.height + p.width * p.width) / 4;
-		this.planetSize = this.cubeSize / 12;
-		this.satelliteSize = this.planetSize / 7;
-		this.ellipseHeight = this.cubeSize
-		this.ellipseWidth = this.ellipseHeight / 2
-		this.semiMajorAxis = this.ellipseHeight / 2;
-		this.semiMinorAxis = this.ellipseWidth / 2;
+		p.stroke(255);
+		let size = 400;
+		let centerX = p.width / 2;
+		let centerY = p.height / 2;
+		this.chip1 = new Chip(p, centerX - 300, centerY - 300, size, 40, 5);
+		this.chip2 = new Chip(p, centerX - 100, centerY - 100, size, 40, 5);
 	}
 
 	draw(p: p5): void {
 		p.clear();
-		p.background(0, 0, 0, 150);
-		p.orbitControl();
-		this.drawText(p, this.text, 0, 0);
-		p.rotateY(p.millis() * 0.01);
-		p.rotateX(p.millis() * 0.01)
-		p.rotateZ(p.millis() * 0.01)
-		this.drawCube(p, 0, 0, 0, this.cubeSize, this.COLORS.RED);
-		this.drawPlanet(p, 0, 0, 0, this.planetSize);
-		this.drawOrbite(p, 0, 0, 0, this.ellipseWidth, this.ellipseHeight, this.COLORS.ELECTRIC_BLUE);
-		this.drawSatelliteInOrbite(p, this.angle, this.semiMinorAxis, this.semiMajorAxis, this.satelliteSize, this.COLORS.NEON_PINK)
-		p.stroke(this.COLORS.NEON_GREEN)
-		this.calculateAngle()
+		this.drawBackground(p);
+		this.chip1!.draw(p);
+		this.chip2!.draw(p);
+		this.drawNodes(p);
 	}
 
-	calculateAngle(): void {
-		if (this.angle >= 360 / 2 || this.angle <= 0)
-			this.c = this.c * -1
-		this.angle += 10 * this.c;
-	}
-
-	drawCube(p: p5, x: number, y: number, z: number, size: number, color: string): void {
-		p.push();
-		p.strokeWeight(10)
-		p.stroke(color);
-		p.noFill()
-		p.translate(x, y, z);
-		p.box(size);
-		p.pop();
-	}
-
-	drawPlanet(p: p5, x: number, y: number, z: number, size: number): void {
-		p.push();
-		p.noStroke()
-		p.ambientLight(128);
-		p.pointLight(255, 255, 255, this.x, this.y, 0);
-		// normal material shows the geometry normals
-		p.normalMaterial();
-		// ambient materials reflect under any light
-		p.ambientMaterial(255, 0, 0);
-		// emissive materials show the same color regardless of light
-		p.emissiveMaterial(0, 255, 0);
-		// specular materials reflect the color of the light source
-		// and can vary in 'shininess'
-		p.shininess(10);
-		p.specularMaterial(0, 255, 0);
-		p.translate(x, y, z);
-		p.sphere(size);
-		p.pop();
-	}
-
-	drawOrbite(p: p5, x: number, y: number, z: number, w: number, h: number, color: string): void {
-		p.push();
-		p.noFill();
-		p.strokeWeight(5)
-		p.stroke(color);
-		p.translate(x, y, z);
-		p.rotateY(45);
-		p.rotateX(-45);
-		p.rotateZ(45);
-		p.ellipse(0, 0, w, h);
-		p.pop();
-	}
-
-	drawSatellite(p: p5, x: number, y: number, z: number, size: number, color: string): void {
-		console.log(x, y)
-		p.stroke(color);
-		p.push();
-		p.rotateY(45);
-		p.rotateX(-45);
-		p.rotateZ(45);
-		p.translate(x, y, z);
-		p.sphere(size);
-		p.pop();
-	}
-
-	drawSatelliteInOrbite(p: p5, angle: number, semiMinorAxis: number, semiMajorAxis: number, satelliteSize: number, color: string) {
-		let cos = p.cos(angle)
-		let x = semiMinorAxis * cos
-		let y = this.c * this.getEllipseY(semiMinorAxis, semiMajorAxis, x);
-		this.x = x
-		this.y = y
-		this.drawSatellite(p, this.x, this.y, 0, satelliteSize, color);
-	}
-
-	drawText(p: p5, text: [string, string, string, string], x: number, y: number): void {
-		p.push()
-		p.camera(0, 0, p.sqrt(p.height * p.height + p.width * p.width) / 2, 0, 0, 0, 0, 1, 0);
-		p.rotateY(0);
-		p.rotateX(0);
-		p.rotateZ(0);
-		p.translate(0, 0, 0)
-		p.stroke(0);
-		p.strokeWeight(1);
-		p.fill(this.COLORS.WHITE);
-		p.textFont(this.font("Pixelify"), 64);
-		p.translate(0, 0, 0);
-		p.textAlign(p.CENTER, p.CENTER);
-		p.text(text[0], 0, -p.height / 2);
-		p.text(text[1], 0, p.height / 2 - 2 * 64);
-		p.text(text[2], 0, p.height / 2 - 64);
-		p.text(text[3], 0, p.height / 2);
-		p.pop()
-	}
 
 	hydra(h: Hydra, p: p5, active: boolean): void {
-		h
-			.src(h.s0)//.osc(2, 100, 0.5)
-			//.modulate(h.noise(0.3), 0.5)
-			.add(h.src(h.o0).scale(() =>
-				p.sin(h.time) + 2 * p.cos(h.time) + 5 * p.sin(h.time) + 10 * p.cos(h.time)), .5)
-			.diff(h.src(h.o0).scale(10))
-			.diff(h.osc(1000, 20, 1.5).scale(10))
-			//.modulateScale(h.noise(1000), .01)
-			//.modulate(h.noise(3), 0.5)
-			.out()
+		h.src(h.s0)
+			.scale(1.05)
+			.mult(h.osc(0.1, 0.1, () => Math.tan(h.time)).saturate(100).kaleid(100))
+			.modulate(h.o0, 0.001)
+			.add(h.o0, 0.001)
+			.modulate(h.noise(() => Math.tan(h.time), () => Math.tan(h.time)), 0.001)
+			.blend(h.src(h.o0).brightness(-.02), .4)
+			.layer(h.s0)
+			.modulateScale(h.noise(10), .01)
+			.out(h.o0)
+	}
 
-		h.render(h.o0);
+	drawBackground(p: p5): void {
+		p.stroke(COLORS.BLACK);
+		p.strokeWeight(.4);
+		for (let x = 0; x < p.width; x += 5) {
+			p.line(x, 0, x, p.height);
+		}
+		for (let y = 0; y < p.height; y += 5) {
+			p.line(0, y, p.width, y);
+		}
+	}
+
+	drawNodes(p: p5): void {
+		for (let i = 0; i < this.chip1!.nodesInput.length; i++) {
+			let node1Input = this.chip1!.nodesInput[i];
+			let node2Input = this.chip2!.nodesInput[i];
+			let node1Output = this.chip1!.nodesOutput[i];
+			let node2Output = this.chip2!.nodesOutput[i];
+			p.noFill()
+			p.strokeWeight(.3)
+			p.rect(node1Output.x, node1Output.y, node2Output.x, node2Output.y);
+			p.stroke(COLORS.DARK_GREEN);
+			p.line(node1Input.x, node1Input.y, node2Input.x, node2Input.y);
+		}
 	}
 
 	keyPressed(p: p5, h: Hydra): void {
@@ -189,9 +207,6 @@ class Jan6SV extends SyntheticVisionAbstract {
 	onBackCanva: () => void = () => {
 	};
 
-	getEllipseY(a: number, b: number, x: number): number {
-		return b * Math.sqrt(1 - (x * x) / (a * a));
-	}
 }
 
-export default Jan6SV;
+export default Jan5SV;
