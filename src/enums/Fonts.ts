@@ -6,6 +6,7 @@ export enum Fonts {
 	TypeWrite = "TypeWrite",
 	Volunmo = "Volunmo",
 	NotoSans = "NotoSans",
+	Pixelify = "Pixelify",
 }
 
 export const FontPaths: Map<string, string> = new Map<string, string>([
@@ -14,4 +15,5 @@ export const FontPaths: Map<string, string> = new Map<string, string>([
 	[Fonts.TypeWrite, Paths.TypeWrite],
 	[Fonts.Volunmo, Paths.Volunmo],
 	[Fonts.NotoSans, Paths.NotoSans],
+	[Fonts.Pixelify, Paths.Pixelify],
 ]);
