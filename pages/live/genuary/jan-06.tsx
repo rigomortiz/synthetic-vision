@@ -10,7 +10,7 @@ import CodeMirrorEditor from "../../../components/CodeMirrorEditor";
 import Jan6SV from "../../../visions/genuary/Jan6SV";
 
 const SyntheticVisionLiveCodingWrapper: ComponentType<SyntheticVisionLiveCodingProps> =
-	dynamic((): Promise<{default: ComponentType<SyntheticVisionLiveCodingProps>}> =>
+	dynamic((): Promise<{ default: ComponentType<SyntheticVisionLiveCodingProps> }> =>
 		import("../../../components/SyntheticVisionLiveCodingWrapper"), {
 		ssr: false
 	})
@@ -20,7 +20,8 @@ const fileName = 'jan-06.js';
 
 export default function Home() {
 	const [code, setCode] = useState("");
-	const [vision, setVision] = useState<((p: p5, h: Hydra, sv: SyntheticVisionAbstract) => void)>(() => {});
+	const [vision, setVision] = useState<((p: p5, h: Hydra, sv: SyntheticVisionAbstract) => void)>(() => {
+	});
 
 	const handleCodeChange = useCallback((code: string) => {
 		setCode(code);
