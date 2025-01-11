@@ -25,7 +25,6 @@ const SyntheticVisionWrapper: React.FC<SyntheticVisionProps> = ({vision}) => {
 		if (!gl) {
 			console.error("WebGL not supported, falling back to a static image or alternative content.");
 			// Provide fallback content or alternative rendering here.
-
 			return;
 		}
 

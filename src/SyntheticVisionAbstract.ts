@@ -46,9 +46,32 @@ abstract class SyntheticVisionAbstract {
     p.noCursor();
     p.colorMode(p.RGB);
     p.noLoop();
-    h.s0.init({src: this.canvas.elt});
+    this.initHydra(p, h);
     this.initMic(p);
     this.setup(p, h);
+  }
+
+  initHydra(p: p5, h: Hydra): void {
+    h.s0.init({src: this.canvas.elt});
+  }
+
+  initScreenCapture(p: p5): void {
+    let constraints = {
+      video: {
+        mandatory: {
+          minWidth: 1280,
+          minHeight: 720
+        },
+        optional: [{ maxFrameRate: 30 }]
+      },
+      audio: false
+    };
+    // @ts-ignore
+    p.createCapture(constraints);
+  }
+
+  initScreenCaptureHydra(p: p5, h: Hydra): void {
+    h.s1.initScreen()
   }
 
   initMic(p: p5): void {
