@@ -5,6 +5,8 @@ export enum Paths {
 	Volunmo = '/fonts/volunmo/volunmo.ttf',
 	NotoSans = '/fonts/noto-sans/NotoSans.ttf',
 	Pixelify = '/fonts/pixelify/pixelify.ttf',
+	Staatliches = '/fonts/staatliches/Staatliches.ttf',
+	OneDollarBill = '/obj/one_dollar_bill.obj',
 
 	EncryptedNode = '/audio/encrypted_node.wav',
 	NoFuture = '/audio/no-future.wav',

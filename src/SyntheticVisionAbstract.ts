@@ -5,6 +5,8 @@ import FontManager from "./managers/FontManager";
 import {FontPaths} from "./enums/Fonts";
 import SoundManager from "./managers/SoundManager";
 import {SoundPaths, Sounds} from "./enums/Sounds";
+import {ModelPaths} from "./enums/Models";
+import ModelManager from "./managers/ModelManager";
 
 export enum SyntheticsVisions {
   Intro = "Intro",
@@ -19,6 +21,7 @@ abstract class SyntheticVisionAbstract {
   private _fft: p5.FFT | undefined;
   private _amplitude: p5.Amplitude | undefined;
   private _fonts: Map<string, p5.Font> = new Map<string, p5.Font>();
+  private _models: Map<string, p5.Geometry> = new Map<string, p5.Geometry>();
 
   private _sounds: Map<string, p5.SoundFile> = new Map<string, p5.SoundFile>();
   private _sound: p5.SoundFile | undefined;
@@ -37,8 +40,10 @@ abstract class SyntheticVisionAbstract {
 
   initialize(p: p5, h: Hydra): void {
     FontManager.preloadFonts(p, FontPaths);
+    //ModelManager.preloadModels(p, ModelPaths);
     //SoundManager.preloadSounds(p, SoundPaths);
     this._fonts = FontManager.getFonts();
+    //this._models = ModelManager.getModels();
     //this._sounds = SoundManager.getSounds();
 
     this._canvas = p.createCanvas(window.innerWidth, window.innerHeight, this.renderer);
@@ -120,6 +125,10 @@ abstract class SyntheticVisionAbstract {
 
   font(name: string): p5.Font {
     return this._fonts.get(name)!;
+  }
+
+  model(name: string): p5.Geometry {
+    return this._models.get(name)!;
   }
 
   get mic(): p5.AudioIn | undefined {
