@@ -96,7 +96,6 @@ class Jan1SV extends SyntheticVisionAbstract {
 					p.noFill()
 					p.circle(x, y, r);
 				}
-				p.frameRate(60);
 			}
 		}
     }

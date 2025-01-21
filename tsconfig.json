@@ -22,7 +22,8 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "node_modules/@types/p5/global.d.ts"
   ],
   "exclude": [
     "node_modules",
