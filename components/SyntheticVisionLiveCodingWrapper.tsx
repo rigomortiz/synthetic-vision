@@ -1,4 +1,6 @@
 import React, {RefObject, useCallback, useEffect, useRef, useState} from "react";
+import dynamic from 'next/dynamic';
+
 import p5 from "p5";
 // @ts-ignore
 import Hydra from "hydra-synth";
@@ -31,11 +33,16 @@ const SyntheticVisionLiveCodingWrapper: React.FC<SyntheticVisionLiveCodingProps>
 
 		const h: any = new Hydra({
 			canvas: p5Div.current!.getElementsByTagName("canvas")[0],
-			width: window.innerWidth,
-			height: window.innerHeight,
+			width: window.innerWidth - 20,
+			height: window.innerHeight - 20,
 			makeGlobal: false,
-			detectAudio: true,
+			detectAudio: false,
+			precision: "highp",
+			autoLoop: true,
+			numSources: 4,
+			numOutputs: 4,
 		}).synth;
+
 
 		const p5Module = await import("p5");
 		// @ts-ignore

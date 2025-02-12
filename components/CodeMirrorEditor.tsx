@@ -1,12 +1,16 @@
+import styles from "./../styles/CodeMirrorEditor.module.css";
 import React, {useEffect} from 'react';
 import CodeMirror from '@uiw/react-codemirror';
+import { Extension } from '@codemirror/state';
 import {createTheme} from '@uiw/codemirror-themes';
 import {javascript} from '@codemirror/lang-javascript';
 import {tags as t} from '@lezer/highlight';
+
 import p5 from "p5";
 // @ts-ignore
 import Hydra from "hydra-synth";
 import SyntheticVisionAbstract from "../src/SyntheticVisionAbstract";
+import ScreenRecorder from "../src/utils/ScreenRecorder";
 
 interface CodeMirrorEditorProps {
 	fileName: string;
@@ -14,7 +18,7 @@ interface CodeMirrorEditorProps {
 	setVision: (vision: (p: p5, h: Hydra, sv: SyntheticVisionAbstract) => void) => void;
 }
 
-const myTheme = createTheme({
+const myTheme: Extension = createTheme({
 	theme: 'dark',
 	settings: {
 		background: 'rgba(0, 0, 0, 0.5)',
@@ -50,65 +54,113 @@ const extensions = [javascript({jsx: true})];
 const CodeMirrorEditor: React.FC<CodeMirrorEditorProps> = ({fileName, onCodeChange, setVision}) => {
 	const [value, setValue] = React.useState('');
 	const [visible, setVisible] = React.useState(true);
+	const [recVisible, setRecVisible] = React.useState(true);
     const [error, setError] = React.useState<string | null>(null);
+    const mediaRecorderRef: React.MutableRefObject<MediaRecorder | null> = React.useRef<MediaRecorder | null>(null);
+	const [ready, setReady] = React.useState(false);
+	const [video, setVideo] = React.useState();
+	const [gif, setGif] = React.useState();
+	const screenRecorder = new ScreenRecorder();
 
-	useEffect(() => {
+	const load: () => Promise<void> = async (): Promise<void> => {
+	    await screenRecorder.loadFFmpeg();
+	    setReady(true);
+	}
+
+    useEffect((): void => {
+        load();
+    }, [])
+
+	useEffect((): void => {
 		fetch(`/api/sendFile?fileName=${fileName}`)
 			.then(response => response.text())
 			.then(data => setValue(data))
 			.catch(error => console.error('Error fetching the file:', error));
 	}, [fileName]);
 
-	const onChange = React.useCallback((val: any) => {
+	const onChange: (val: any) => void = React.useCallback((val: any): void => {
 		//console.log('val:', val);
 		setValue(val);
 		//const func = new Function(val);
 		//func();
 	}, []);
 
-	const handleClose = () => {
-		setVisible(false);
-	};
-
-	const handleRunCode = () => {
+	const handleRunCode: () => void = (): void =>{
 		onCodeChange(value);
 		try {
-			const evaluatedVision = eval(value);
-			setVision(() => evaluatedVision);
+			const evaluatedVision: any = eval(value);
+			setVision((): any => evaluatedVision);
             setError(null);
 		} catch (error) {
 			if (error instanceof SyntaxError) {
 				console.error('Syntax error in the code:', error);
                 setError(`Syntax error: ${error.message}`);
-				// Handle the syntax error appropriately here
 			} else {
 				console.error('Error evaluating code:', error);
                 setError(`Error: ${error}`);
-				// Handle other types of errors here
 			}
 		}
 	};
 
-	const handleToggleVisibility = () => {
+	const handleToggleVisibility: () => void = (): void => {
 		setVisible(!visible);
 	};
 
+	const handleGif: () => Promise<void> = async (): Promise<void> => {
+		screenRecorder.loadFFmpeg().then(async (): Promise<void> => {
+			console.log("Recording started");
+			let stream: MediaStream = await screenRecorder.recordScreen();
+		    mediaRecorderRef.current = screenRecorder.createRecorder(stream, true, "gif");
+			handleToggleVisibility();
+		});
+	}
 
-	return (
-		<div className="cm-theme">
-			<button className="close-button" onClick={handleToggleVisibility}>-</button>
+	const handleRecScreen: () => Promise<void> = async (): Promise<void> => {
+		screenRecorder.loadFFmpeg().then(async (): Promise<void> => {
+			console.log("Recording started");
+			let stream: MediaStream = await screenRecorder.recordScreenWithAudio();
+			mediaRecorderRef.current = screenRecorder.createRecorder(stream, false, "video");
+			setRecVisible(false);
+			handleToggleVisibility();
+		});
+
+	}
+
+	const handleStopRec: () => void = (): void => {
+		if (mediaRecorderRef.current) {
+	      console.log(mediaRecorderRef.current);
+	      mediaRecorderRef.current.stop();
+	      console.log("Recording stopped");
+	      setRecVisible(true);
+	    } else {
+	      console.error("mediaRecorder is not initialized");
+	    }
+	}
+
+	let toggleRecScreenButton: any = recVisible ?
+		<button className={styles.rec_button} onClick={handleRecScreen}>REC</button> : <button className={styles.stop_button} onClick={handleStopRec}>STOP</button> ;
+
+	return ready ? (
+		<div className={styles.cm_theme}>
+			<button className={styles.close_button} onClick={handleToggleVisibility}>-</button>
 			{visible && (
 				<>
 					<CodeMirror
+						className={styles.cm_editor}
 						value={value}
 						theme={myTheme}
 						extensions={extensions}
-						onChange={onChange}
-					/>
-					<button className="run-button" onClick={handleRunCode}>⏵</button>
+						onChange={onChange}/>
+					<button className={styles.gif_button} onClick={handleGif}>GIF</button>
+					{toggleRecScreenButton}
+					<button className={styles.run_button} onClick={handleRunCode}>RUN</button>
 				</>
 			)}
 		</div>
-	);
+	) : (
+    <div className={styles.cm_theme}>
+      <p>Loading...</p>
+    </div>
+  );
 };
 export default CodeMirrorEditor;

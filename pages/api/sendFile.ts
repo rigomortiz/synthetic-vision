@@ -8,13 +8,13 @@ export default function handler(req: any, res: any) {
 		return;
 	}
 
-	const filePath = path.resolve('.', 'public/scripts', fileName);
+	const filePath: string = path.resolve('.', 'public/scripts', fileName);
 	if (!fs.existsSync(filePath)) {
 		res.status(404).send('File not found');
 		return;
 	}
 
-	const fileContents = fs.readFileSync(filePath, 'utf8');
+	const fileContents: string = fs.readFileSync(filePath, 'utf8');
 	res.setHeader('Content-Type', 'application/javascript');
 	res.status(200).send(fileContents);
 }

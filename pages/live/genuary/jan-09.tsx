@@ -18,11 +18,11 @@ const SyntheticVisionLiveCodingWrapper: ComponentType<SyntheticVisionLiveCodingP
 const sv: Jan9SV = new Jan9SV()
 const fileName = 'jan-09.js';
 
-export default function Home() {
+export default function Home(): JSX.Element {
 	const [code, setCode] = useState("");
-	const [vision, setVision] = useState<((p: p5, h: Hydra, sv: SyntheticVisionAbstract) => void)>(() => {});
+	const [vision, setVision] = useState<((p: p5, h: Hydra, sv: SyntheticVisionAbstract) => void)>((): void => {});
 
-	const handleCodeChange = useCallback((code: string) => {
+	const handleCodeChange: (code: string) => void = useCallback((code: string): void => {
 		setCode(code);
 	}, []);
 

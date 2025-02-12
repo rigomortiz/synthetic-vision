@@ -1,8 +1,4 @@
 (p, h, sv) => {
-    h.update = () => {
-        p.redraw();
-    }
-
     p.draw = () => {
         p.clear()
         p.lights();
@@ -14,9 +10,9 @@
 
         p.sphere(sv.size);
         p.filter(p.BLUR, 1);
-        size = size - 1;
-        if (size < 1) {
-            size = p.width / 2;
+        sv.size = sv.size - 1;
+        if (sv.size < 1) {
+            sv.size = p.width / 2;
         }
 
         p.beginShape();

@@ -12,6 +12,9 @@ class NoFutureVS extends SyntheticVisionAbstract {
 	explosionSpeed = 5;
 	maxRadius: number = 100;
 	size: number = 0;
+	constructor() {
+		super(true, "webgl", false);
+	}
 
 	preload(p: import("p5")): void {
 		//SoundManager.preloadSounds(p, SoundPaths);

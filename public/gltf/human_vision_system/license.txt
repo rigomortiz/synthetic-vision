@@ -1,0 +1,11 @@
+Model Information:
+* title:	Human vision system
+* source:	https://sketchfab.com/3d-models/human-vision-system-8709f25402c246559a8f682230e56515
+* author:	Sergey Burov (https://sketchfab.com/s-burov)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Human vision system" (https://sketchfab.com/3d-models/human-vision-system-8709f25402c246559a8f682230e56515) by Sergey Burov (https://sketchfab.com/s-burov) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

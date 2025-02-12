@@ -7,7 +7,6 @@ import {FontPaths} from "../enums/Fonts";
 import {SoundPaths} from "../enums/Sounds";
 import SoundManager from "./SoundManager";
 
-
 class SyntheticVisionManager {
   private static instance: SyntheticVisionManager;
   private readonly items: Map<string, SyntheticVisionAbstract>;
@@ -62,7 +61,7 @@ class SyntheticVisionManager {
   public static hydra(h: Hydra, p: p5): void {
     for (let [key, syntheticVision] of SyntheticVisionManager.getInstance().getAllItems()) {
       if (syntheticVision.active) {
-        syntheticVision.hydra(h, p, syntheticVision.active);
+        syntheticVision.hydra(h, p, true);
       }
     }
   }
@@ -70,6 +69,18 @@ class SyntheticVisionManager {
   public static keyPressed(p: p5, h: Hydra): void {
     for (let [key, syntheticVision] of SyntheticVisionManager.getInstance().getAllItems()) {
       syntheticVision.keyPressed(p, h);
+    }
+  }
+
+  public static onBackCanva(): void {
+    for (let [key, syntheticVision] of SyntheticVisionManager.getInstance().getAllItems()) {
+      syntheticVision.onBackCanva();
+    }
+  }
+
+  public static resize(p: p5, h: Hydra): void {
+    for (let [key, syntheticVision] of SyntheticVisionManager.getInstance().getAllItems()) {
+      syntheticVision.resize(p, h);
     }
   }
 

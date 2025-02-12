@@ -20,12 +20,11 @@ const sv: Jan7SV = new Jan7SV()
 const fileName = 'jan-07.js';
 
 
-export default function Home() {
-    const [code, setCode] = useState("");
-	const [vision, setVision] = useState<((p: p5, h: Hydra, sv: SyntheticVisionAbstract) => void)>(() => {
-	});
+export default function Home(): JSX.Element {
+	const [code, setCode] = useState("");
+	const [vision, setVision] = useState<((p: p5, h: Hydra, sv: SyntheticVisionAbstract) => void)>((): void => {});
 
-	const handleCodeChange = useCallback((code: string) => {
+	const handleCodeChange: (code: string) => void = useCallback((code: string): void => {
 		setCode(code);
 	}, []);
 

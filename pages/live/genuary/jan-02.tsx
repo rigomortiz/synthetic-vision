@@ -15,14 +15,14 @@ const SyntheticVisionLiveCodingWrapper: ComponentType<SyntheticVisionLiveCodingP
 		ssr: false
 	})
 
-const sv: Jan2SV = new Jan2SV(true, "webgl")
+const sv: Jan2SV = new Jan2SV()
 const fileName = 'jan-02.js';
 
-export default function Home() {
+export default function Home(): JSX.Element {
 	const [code, setCode] = useState("");
-	const [vision, setVision] = useState<((p: p5, h: Hydra, sv: SyntheticVisionAbstract) => void)>(() => {});
+	const [vision, setVision] = useState<((p: p5, h: Hydra, sv: SyntheticVisionAbstract) => void)>((): void => {});
 
-	const handleCodeChange = useCallback((code: string) => {
+	const handleCodeChange: (code: string) => void = useCallback((code: string): void => {
 		setCode(code);
 	}, []);
 

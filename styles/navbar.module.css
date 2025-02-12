@@ -1,6 +1,0 @@
-.navbar {
-	display: flex;
-	position: fixed; /* Fixed position to make it float */
-	top: 10px;
-	right: 10px;
-}
