@@ -1,0 +1,11 @@
+Model Information:
+* title:	Surveillance room
+* source:	https://sketchfab.com/3d-models/surveillance-room-7fd56cd3917443a99966352beefd8304
+* author:	ra_fuq (https://sketchfab.com/nevidaes)
+
+Model License:
+* license type:	CC-BY-NC-ND-4.0 (http://creativecommons.org/licenses/by-nc-nd/4.0/)
+* requirements:	Author must be credited. No commercial use. Modified versions can not be distributed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Surveillance room" (https://sketchfab.com/3d-models/surveillance-room-7fd56cd3917443a99966352beefd8304) by ra_fuq (https://sketchfab.com/nevidaes) licensed under CC-BY-NC-ND-4.0 (http://creativecommons.org/licenses/by-nc-nd/4.0/)

@@ -12,27 +12,27 @@ const SyntheticVisionWrapper: ComponentType<SyntheticVisionProps> =
 
 const atommicBomb: AtomicBombSV = new AtomicBombSV(true, "webgl");
 
-const vision = (p: p5, h: Hydra) => {
+const vision = (p: p5, h: Hydra): void => {
 
-  p.preload = () => {
+  p.preload = (): void => {
     atommicBomb.preload(p);
   }
 
-  p.setup = () => {
+  p.setup = (): void => {
     atommicBomb.initialize(p, h);
   }
 
-  p.draw = () => {
+  p.draw = (): void => {
     atommicBomb.draw(p);
   }
 
-  h.update = () => {
+  h.update = (): void => {
     p.redraw();
     atommicBomb.hydra(h, p, true);
   }
 }
 
-export default function Home() {
+export default function Home(): JSX.Element {
   return (
     <div>
       <main className={styles.main}>

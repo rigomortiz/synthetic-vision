@@ -1,7 +1,4 @@
 (p, h, sv) => {
-    h.update = () => {
-        p.redraw();
-    }
     p.draw = () => {
         p.clear();
         p.textAlign(p.CENTER, p.CENTER);
@@ -12,13 +9,13 @@
         p.textSize(48);
         p.textFont(sv.font("Terminus"));
         p.fill("#FFFFFF");
-        p.text("PRESS ENTER", 0, 200);
+        p.text("LIVE CODING", 0, 200);
 
         if (p.frameCount % 60 < 30) {
             p.textSize(48);
             p.textFont(sv.font("Terminus"));
             p.fill("#FFFF00");
-            p.text("PRESS ENTER", 0, 200);
+            p.text("LIVE CODING", 0, 200);
         }
 
         let radius = p.map(sv.amplitude.getLevel(), 0, 1, 10, 200);

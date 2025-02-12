@@ -1,0 +1,92 @@
+.cm_theme {
+	position: absolute !important;
+	z-index: 2;
+	font-family: monospace;
+	font-size: 20px;
+	width: 33vw;
+	height: 90vh;
+	word-wrap: break-word;
+	cursor: none;
+	scrollbar-color: greenyellow black;
+	overflow-x: auto;
+}
+
+.cm_editor{
+	height: 90vh;
+	cursor: auto;
+}
+
+.close_button {
+	font-size: 8px;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	background-color: white;
+	color: black;
+	border: none;
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+	z-index: 3;
+}
+
+.run_button {
+	font-size: 8px;
+	position: absolute;
+	top: 10px;
+	right: 50px;
+	background-color: greenyellow;
+	color: black;
+	border: none;
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+	z-index: 3;
+}
+
+.rec_button {
+	font-size: 8px;
+	position: absolute;
+	top: 10px;
+	right: 90px;
+	background-color: blue;
+	color: white;
+	border: none;
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+	z-index: 3;
+}
+
+.stop_button {
+	font-size: 8px;
+	position: absolute;
+	top: 10px;
+	right: 90px;
+	background-color: red;
+	color: white;
+	border: none;
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+	z-index: 3;
+}
+
+.gif_button {
+	font-size: 8px;
+	position: absolute;
+	top: 10px;
+	right: 130px;
+	background-color: mediumvioletred;
+	color: white;
+	border: none;
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+	z-index: 3;
+}

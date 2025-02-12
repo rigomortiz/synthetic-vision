@@ -4,6 +4,10 @@ import * as p5 from "p5";
 import Hydra from "hydra-synth";
 
 class Jan2SV extends SyntheticVisionAbstract {
+	constructor() {
+		super(true, "webgl");
+	}
+
     preload(p: p5): void {
     }
 

@@ -1,6 +1,13 @@
+"c"
+
 import * as p5 from "p5";
 // @ts-ignore
 import Hydra from "hydra-synth";
+import * as THREE from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { CSS3DRenderer, CSS3DObject } from "three/examples/jsm/renderers/CSS3DRenderer";
+import { TrackballControls } from "three/examples/jsm/controls/TrackballControls";
+
 import FontManager from "./managers/FontManager";
 import {FontPaths} from "./enums/Fonts";
 import SoundManager from "./managers/SoundManager";
@@ -16,7 +23,7 @@ export enum SyntheticsVisions {
 abstract class SyntheticVisionAbstract {
   private _active: boolean = false;
   private _canvas!: p5.Renderer;
-  private readonly _renderer: p5.RENDERER;
+  private readonly _typeRenderer: p5.RENDERER;
   private _mic: p5.AudioIn | undefined;
   private _fft: p5.FFT | undefined;
   private _amplitude: p5.Amplitude | undefined;
@@ -33,9 +40,16 @@ abstract class SyntheticVisionAbstract {
   abstract keyPressed(p: p5, h: Hydra): void;
   abstract onBackCanva: () => void;
 
-  constructor(active: boolean = false, renderer: p5.RENDERER = "webgl") {
+  private _renderer: THREE.WebGLRenderer | CSS3DRenderer | undefined;
+  private _scene: THREE.Scene | undefined;
+  private _camera: THREE.PerspectiveCamera | undefined;
+  private _threeActive: boolean = false;
+  private _controls: OrbitControls | TrackballControls | undefined;
+
+  constructor(active: boolean = false, typeRenderer: p5.RENDERER = "webgl", threeActive?: boolean) {
     this._active = active;
-    this._renderer = renderer;
+    this._typeRenderer = typeRenderer;
+    this._threeActive = threeActive || false;
   }
 
   initialize(p: p5, h: Hydra): void {
@@ -46,9 +60,30 @@ abstract class SyntheticVisionAbstract {
     //this._models = ModelManager.getModels();
     //this._sounds = SoundManager.getSounds();
 
-    this._canvas = p.createCanvas(window.innerWidth, window.innerHeight, this.renderer);
+    this._canvas = p.createCanvas(window.innerWidth, window.innerHeight, this._typeRenderer);
     this._active = true;
-    p.noCursor();
+
+    if (this._threeActive) {
+      // Initialize Three.js renderer
+      this._renderer = new THREE.WebGLRenderer({ canvas: this._canvas.elt });
+      //this._renderer = new CSS3DRenderer({ element: this.canvas.elt });
+      this._renderer.setSize(window.innerWidth, window.innerHeight);
+      //this.canvas.elt.appendChild(this._renderer.domElement);
+      this._renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1))
+      // Initialize Three.js scene
+      this._scene = new THREE.Scene();
+      // Initialize Three.js camera
+      this._camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
+
+      this._camera.position.z = 3
+      this._scene.add(this._camera);
+
+      this._controls = new OrbitControls(this.camera!, this.renderer!.domElement);
+      //this._controls = new TrackballControls(this.camera!, this.renderer!.domElement);
+      //his._controls.enableDamping = true;
+    }
+    h.bpm = 60
+   // p.noCursor();
     p.colorMode(p.RGB);
     p.noLoop();
     this.initHydra(p, h);
@@ -147,11 +182,6 @@ abstract class SyntheticVisionAbstract {
     return this._amplitude;
   }
 
-
-  get renderer(): p5.RENDERER {
-    return this._renderer;
-  }
-
   remove(): void {
     this.canvas.remove();
     this.canvas.elt.remove();
@@ -177,6 +207,55 @@ abstract class SyntheticVisionAbstract {
   show(): void {
     this.canvas.show();
   }
+
+  get renderer(): THREE.WebGLRenderer | CSS3DRenderer | undefined {
+    return this._renderer;
+  }
+
+  set renderer(renderer: THREE.WebGLRenderer | CSS3DRenderer | undefined) {
+    this._renderer = renderer;
+  }
+
+    get scene(): THREE.Scene | undefined {
+        return this._scene;
+    }
+
+    get camera(): THREE.PerspectiveCamera | undefined {
+        return this._camera;
+    }
+
+    get controls(): OrbitControls | TrackballControls | undefined {
+        return this._controls;
+    }
+
+    get threeActive(): boolean {
+        return this._threeActive;
+    }
+
+    resize(p: p5, h: Hydra): void {
+        p.resizeCanvas(window.innerWidth, window.innerHeight);
+        h.setResolution(window.innerWidth - 20, window.innerHeight - 20);
+        //h.hush();
+        h.render()
+
+        /*h = new Hydra({
+			canvas: this.canvas.elt,
+			width: window.innerWidth - 20,
+			height: window.innerHeight - 20,
+			makeGlobal: false,
+			detectAudio: false,
+			precision: "highp",
+			autoLoop: true,
+			numSources: 4,
+			numOutputs: 4,
+		}).synth;*/
+
+        if (this._threeActive) {
+            this._renderer!.setSize(window.innerWidth, window.innerHeight);
+            this._camera!.aspect = window.innerWidth / window.innerHeight;
+            this._camera!.updateProjectionMatrix();
+        }
+    }
 
 }
 

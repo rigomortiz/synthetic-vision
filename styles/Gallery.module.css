@@ -1,0 +1,102 @@
+
+/* styles/Gallery.module.css */
+.main {
+	position: absolute !important;
+	height: 100%;
+	width: 100%;
+	padding: 0 0;
+	right: 0;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	.canvas{
+		position: absolute !important;
+		z-index: -1;
+		height: 100%;
+		width: 100%;
+		padding: 0 0;
+		right: 0;
+		left: 0;
+		top: 0;
+		bottom: 0;
+	}
+}
+
+.frame iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 1024px;
+	height: 768px;
+	border: none;
+	border-radius: 20px;
+	background: #000;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.window {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+}
+
+.day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.gif {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.2s;
+  border: 2px solid #000; /* Border */
+  border-radius: 5px;
+}
+.no-gif {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.2s;
+  border: 2px solid #000; /* Border */
+  border-radius: 5px;
+}
+
+.gif:hover {
+  transform: scale(1.1);
+  border-color: #0000ff; /* Change color on hover */
+}
+
+.content {
+  width: 100%;
+  height: 100%;
+  background: #f0f0f0;
+  border-radius: 3px;
+  overflow-y: auto;
+  padding: 0;
+}
+
+.wrapper {
+  padding: 0px;
+  width: 100%;
+  height: 100%;
+}
+

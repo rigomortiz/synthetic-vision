@@ -7,7 +7,7 @@ export interface SyntheticVisionProps {
 	vision: (p: p5, h: Hydra) => void;
 }
 
-const SyntheticVisionWrapper: React.FC<SyntheticVisionProps> = ({vision}) => {
+const SyntheticVisionWrapper: React.FC<SyntheticVisionProps> = ({vision}: SyntheticVisionProps) => {
 	const p5Div: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
 	const hydraCanvas: RefObject<HTMLCanvasElement> = useRef<HTMLCanvasElement>(null);
 	const [isMounted, setIsMounted] = useState<boolean>(false)
@@ -33,10 +33,14 @@ const SyntheticVisionWrapper: React.FC<SyntheticVisionProps> = ({vision}) => {
 
 		const hydraInstance = new Hydra({
 			canvas: p5Canvas,
-			//width: window.innerWidth,
-			//height: window.innerHeight,
+			width: window.innerWidth - 20,
+			height: window.innerHeight - 20,
 			makeGlobal: false,
-			detectAudio: true,
+			detectAudio: false,
+			precision: "highp",
+			autoLoop: true,
+			numSources: 4,
+			numOutputs: 4,
 		}).synth;
 
 		const initP5 = async () => {

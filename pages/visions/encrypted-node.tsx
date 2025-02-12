@@ -12,27 +12,27 @@ const SyntheticVisionWrapper: ComponentType<SyntheticVisionProps> =
 
 const encryptedNode: EncryptedNodeSV = new EncryptedNodeSV(true, "webgl");
 
-const vision = (p: p5, h: Hydra) => {
+const vision = (p: p5, h: Hydra): void => {
 
-    p.preload = () => {
+    p.preload = (): void => {
         encryptedNode.preload(p);
     }
 
-    p.setup = () => {
+    p.setup = (): void => {
         encryptedNode.initialize(p, h);
     }
 
-    p.draw = () => {
+    p.draw = (): void => {
         encryptedNode.draw(p);
     }
 
-    h.update = () => {
+    h.update = (): void => {
         p.redraw();
         encryptedNode.hydra(h, p, true);
     }
 }
 
-export default function Home() {
+export default function Home(): JSX.Element {
     return (
         <div>
             <main className={styles.main}>

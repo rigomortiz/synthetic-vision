@@ -1,15 +1,21 @@
 import SyntheticVisionAbstract from "../../src/SyntheticVisionAbstract";
-import * as p5 from "p5";
+import p5 from "p5";
 // @ts-ignore
 import Hydra from "hydra-synth";
 
 class Jan1SV extends SyntheticVisionAbstract {
+	constructor() {
+		super(true, "webgl");
+	}
+
     preload(p: p5): void {
     }
+
     setup(p: p5, h: Hydra): void {
 		p.describe('A Init');
 		p.pixelDensity(2)
     }
+
     draw(p: p5): void {
 		let numLines = 10;
 		p.clear()

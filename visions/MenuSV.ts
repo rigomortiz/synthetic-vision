@@ -35,7 +35,6 @@ class MenuSV extends SyntheticVisionAbstract {
 
 	}
 
-
 	keyPressed(p: p5): void {
 		if (p.keyCode === p.UP_ARROW) {
 			this.pressUp();
