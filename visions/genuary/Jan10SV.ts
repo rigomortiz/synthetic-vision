@@ -3,7 +3,7 @@ import * as p5 from "p5";
 // @ts-ignore
 import Hydra from "hydra-synth";
 
-class Jan1SV extends SyntheticVisionAbstract {
+class Jan10SV extends SyntheticVisionAbstract {
 	title: string = "You can only use TAU in your code, no other number allowed."
 
 	constructor() {
@@ -61,4 +61,4 @@ class Jan1SV extends SyntheticVisionAbstract {
 
 }
 
-export default Jan1SV;
+export default Jan10SV;

@@ -231,7 +231,7 @@ class GallerySV extends SyntheticVisionAbstract {
             this.camera!.position.z = 3 * Math.sin(time);
             this.camera!.lookAt(this.scene!.position);
           }*/
-        this.pivot.rotation.y = time;
+       // this.pivot.rotation.y = time;
         this.controls!.update();
         this.renderer!.render(this.scene!, this.camera!);
         this.cssRenderer!.render(this.scene!, this.camera!);

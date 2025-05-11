@@ -15,7 +15,7 @@ const COLORS = [
 	"#00FF00",
 ]
 
-class Jan1SV extends SyntheticVisionAbstract {
+class Jan9SV extends SyntheticVisionAbstract {
 	title: string = "A Init";
 
 
@@ -170,4 +170,4 @@ class Jan1SV extends SyntheticVisionAbstract {
 
 }
 
-export default Jan1SV;
+export default Jan9SV;
