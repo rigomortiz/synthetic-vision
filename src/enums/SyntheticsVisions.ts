@@ -5,5 +5,7 @@ export enum SyntheticsVisions {
 	NullPointerException = "NullPointerException",
 	GlitchWorld = "GlitchWorld",
 	EncryptedNode = "EncryptedNode",
-	Gallery = "Gallery"
+	Gallery = "Gallery",
+	CiudadSinRecuerdos = "CiudadSinRecuerdos",
+	Opera = "Opera",
 }

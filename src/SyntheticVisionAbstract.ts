@@ -1,5 +1,3 @@
-"c"
-
 import * as p5 from "p5";
 // @ts-ignore
 import Hydra from "hydra-synth";
@@ -43,6 +41,7 @@ abstract class SyntheticVisionAbstract {
   private _renderer: THREE.WebGLRenderer | CSS3DRenderer | undefined;
   private _scene: THREE.Scene | undefined;
   private _camera: THREE.PerspectiveCamera | undefined;
+  private _cameraOrtho: THREE.OrthographicCamera | undefined;
   private _threeActive: boolean = false;
   private _controls: OrbitControls | TrackballControls | undefined;
 
@@ -55,10 +54,10 @@ abstract class SyntheticVisionAbstract {
   initialize(p: p5, h: Hydra): void {
     FontManager.preloadFonts(p, FontPaths);
     //ModelManager.preloadModels(p, ModelPaths);
-    //SoundManager.preloadSounds(p, SoundPaths);
+    SoundManager.preloadSounds(p, SoundPaths);
     this._fonts = FontManager.getFonts();
     //this._models = ModelManager.getModels();
-    //this._sounds = SoundManager.getSounds();
+    this._sounds = SoundManager.getSounds();
 
     this._canvas = p.createCanvas(window.innerWidth, window.innerHeight, this._typeRenderer);
     this._active = true;
@@ -72,11 +71,15 @@ abstract class SyntheticVisionAbstract {
       this._renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1))
       // Initialize Three.js scene
       this._scene = new THREE.Scene();
+      const frustumSize = 5;
+      const aspect = window.innerWidth / window.innerHeight;
       // Initialize Three.js camera
-      this._camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
+      this._camera = new THREE.PerspectiveCamera(80, aspect, 0.1, 100);
+      this._cameraOrtho = new THREE.OrthographicCamera( - frustumSize * aspect, frustumSize * aspect, frustumSize, - frustumSize, 0.1, 100 );
 
       this._camera.position.z = 3
       this._scene.add(this._camera);
+      this._scene.add(this._cameraOrtho);
 
       this._controls = new OrbitControls(this.camera!, this.renderer!.domElement);
       //this._controls = new TrackballControls(this.camera!, this.renderer!.domElement);
@@ -126,6 +129,14 @@ abstract class SyntheticVisionAbstract {
     this._amplitude = this.initAmplitude(p, "sound");
   }
 
+  set fft(fft: p5.FFT | undefined) {
+    this._fft = fft;
+  }
+
+  set amplitude(amplitude: p5.Amplitude | undefined) {
+    this._amplitude = amplitude;
+  }
+
   initMicrophone(p: p5): p5.AudioIn {
     // @ts-ignore
     let mic: p5.AudioIn = new p.constructor.AudioIn();
@@ -172,6 +183,10 @@ abstract class SyntheticVisionAbstract {
 
   get sound(): p5.SoundFile | undefined {
     return this._sound;
+  }
+
+  set sound(sound: p5.SoundFile | undefined) {
+    this._sound = sound;
   }
 
   get fft(): p5.FFT | undefined {
