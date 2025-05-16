@@ -40,8 +40,8 @@ class OperaSV extends SyntheticVisionAbstract {
 		  // of zooms to displace the colors slightly
 		  gl_FragColor = vec4(
 		    texture2D(tex0, vTexCoord).r,
-		    texture2D(tex0, zoom(vTexCoord, 1.05)).g,
-		    texture2D(tex0, zoom(vTexCoord, 1.1)).b,
+		    texture2D(tex0, zoom(vTexCoord, 0.3)).g,
+		    texture2D(tex0, zoom(vTexCoord, 0.3)).b,
 		    texture2D(tex0, vTexCoord).a
 		  );
 		}
@@ -52,14 +52,14 @@ class OperaSV extends SyntheticVisionAbstract {
 	}
 
 	preload(p: p5): void {
-		this.video = p.createVideo("/video/opera.mp4");
+		this.video = p.createVideo("/video/MVI_1640.mp4");
+		this.sound = p.loadSound("/audio/opera.mp3");
 		this.video!.hide();
 		this.video.showControls()
 		this.video!.loop();
 		this.video!.volume(0);
-		this.shader = p.createShader(this.vertexSrc, this.fragmentSrc);
-		p.angleMode(p.DEGREES);
-		this.sound = p.loadSound("/audio/opera.mp3");
+		//this.shader = p.createShader(this.vertexSrc, this.fragmentSrc);
+		this.shader = p.loadShader('/shaders/shaderRGB.vert', '/shaders/shaderRGB.frag');
 	}
 
 	setup(p: p5, h: Hydra): void {
