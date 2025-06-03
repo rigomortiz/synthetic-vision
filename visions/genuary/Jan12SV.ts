@@ -4,6 +4,9 @@ import * as p5 from "p5";
 import Hydra from "hydra-synth";
 
 class Jan12SV extends SyntheticVisionAbstract {
+    mouseMove(p: import("p5")): void {
+        throw new Error("Method not implemented.");
+    }
 	title: string = "Subdivision"
 	video: p5.MediaElement | null = null;
 	shader: p5.Shader | undefined;
@@ -67,7 +70,7 @@ class Jan12SV extends SyntheticVisionAbstract {
 		//this.hide();
 	}
 
-	draw(p: p5): void {
+	draw(p: p5, h: Hydra): void {
 		//p.background(0);
 		p.textFont(this.font("Terminus"));
 		p.textAlign(p.CENTER);

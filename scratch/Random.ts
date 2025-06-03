@@ -407,7 +407,7 @@ const Intro = (p: p5) => {
             }
         }
 
-        draw(p: p5) {
+        draw(p: p5, h: Hydra) {
             p.stroke(this.color);
             p.line(this.x, this.y, this.x, this.y + this.length);
         }

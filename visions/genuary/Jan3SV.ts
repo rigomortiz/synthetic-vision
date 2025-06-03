@@ -4,6 +4,9 @@ import * as p5 from "p5";
 import Hydra from "hydra-synth";
 
 class Jan3SV extends SyntheticVisionAbstract {
+    mouseMove(p: import("p5")): void {
+        throw new Error("Method not implemented.");
+    }
     digits: string = "0123456789";
     numbers: string[][] = [];
     numLines: number = 42;
@@ -30,7 +33,7 @@ class Jan3SV extends SyntheticVisionAbstract {
         }
     }
 
-    draw(p: p5): void {
+    draw(p: p5, h: Hydra): void {
         p.clear();
         p.fill(0, 42, 0, 42);
         p.stroke(255, 0, 255, 42);

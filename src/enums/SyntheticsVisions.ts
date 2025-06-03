@@ -8,4 +8,8 @@ export enum SyntheticsVisions {
 	Gallery = "Gallery",
 	CiudadSinRecuerdos = "CiudadSinRecuerdos",
 	Opera = "Opera",
+	OperaScene1 = "OperaScene1",
+	OperaScene2 = "OperaScene2",
+	OperaScene3 = "OperaScene3",
+	OperaScene4 = "OperaScene4",
 }

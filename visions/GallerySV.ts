@@ -39,6 +39,9 @@ class IframeCSS3Object {
 
 
 class GallerySV extends SyntheticVisionAbstract {
+    mouseMove(p: import("p5")): void {
+        throw new Error("Method not implemented.");
+    }
   cssRenderer: CSS3DRenderer | undefined;
   title: string = "Gallery";
   humanVisionSystemPromise: Promise<GLTF> | undefined;
@@ -221,7 +224,7 @@ class GallerySV extends SyntheticVisionAbstract {
         this.pointer.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
     }
 
-    draw(p: p5): void {
+    draw(p: p5, h: Hydra): void {
         const time: number = performance.now() * 0.0003;
         /*
          if (!this.monitor!.userData.clicked) {

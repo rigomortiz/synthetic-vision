@@ -91,6 +91,9 @@ const atomicBombEffect = (p: p5, h: Hydra) => {
 };
 */
 class AtommicBombSV extends SyntheticVisionAbstract {
+    mouseMove(p: import("p5")): void {
+        throw new Error("Method not implemented.");
+    }
 	explosionRadius = 0;
 	explosionSpeed = 5;
 	maxRadius: number = 0;
@@ -105,7 +108,7 @@ class AtommicBombSV extends SyntheticVisionAbstract {
 		this.explosionColor = p.color(255, 150, 0);
 	}
 
-	draw(p: p5): void {
+	draw(p: p5, h: Hydra): void {
 		let level = this.amplitude!.getLevel();
 		let waveform = this.fft!.waveform();
 		let explosionRadius = p.map(level, 0, 0.1, 100, 1000);

@@ -4,6 +4,9 @@ import * as p5 from "p5";
 import Hydra from "hydra-synth";
 
 class Jan7SV extends SyntheticVisionAbstract {
+    mouseMove(p: import("p5")): void {
+        throw new Error("Method not implemented.");
+    }
 	constructor() {
 		super(true, "webgl");
 	}
@@ -16,7 +19,7 @@ class Jan7SV extends SyntheticVisionAbstract {
 		p.frameCount = 3;
 	}
 
-	draw(p: p5): void {
+	draw(p: p5, h: Hydra): void {
 		p.clear()
 		this.drawCyberpunkFrame(p);
 		//this.drawTerminatorVision(p);

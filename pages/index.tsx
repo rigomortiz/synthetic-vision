@@ -45,7 +45,7 @@ const SyntheticVisionMain = (p: p5, h: Hydra) => {
         transitionOpacity = 255;
       }
     } else {
-      drawActiveCanvas(p);
+      drawActiveCanvas(p, h);
     }
   };
 

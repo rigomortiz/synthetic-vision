@@ -52,9 +52,9 @@ class SyntheticVisionManager {
     }
   }
 
-  public static draw(p: p5): void {
+  public static draw(p: p5, h: Hydra): void {
     for (let [key, syntheticVision] of SyntheticVisionManager.getInstance().getAllItems()) {
-      syntheticVision.draw(p);
+      syntheticVision.draw(p, h);
     }
   }
 

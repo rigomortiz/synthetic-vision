@@ -245,7 +245,7 @@ onPointerClick(event: MouseEvent): void {
         return object;
   }
 
-  draw(p: p5): void {
+  draw(p: p5, h: Hydra): void {
     const time: number = performance.now() * 0.0003;
 
      /*if (!this.monitor!.userData.clicked) {

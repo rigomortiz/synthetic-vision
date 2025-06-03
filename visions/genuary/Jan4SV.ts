@@ -4,6 +4,9 @@ import * as p5 from "p5";
 import Hydra from "hydra-synth";
 
 class Jan4SV extends SyntheticVisionAbstract {
+    mouseMove(p: import("p5")): void {
+        throw new Error("Method not implemented.");
+    }
 	title: string = "Black on black."
 	shader: p5.Shader | undefined;
 	img: p5.Image | undefined;
@@ -26,7 +29,7 @@ class Jan4SV extends SyntheticVisionAbstract {
 		this.hide();
 	}
 
-	draw(p: p5): void {
+	draw(p: p5, h: Hydra): void {
 		p.shader(this.shader!);
 		this.shader!.setUniform('texture', this.img!);
 		this.shader!.setUniform('u_time', p.frameCount * 0.01);

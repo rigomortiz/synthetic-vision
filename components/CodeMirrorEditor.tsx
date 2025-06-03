@@ -2,6 +2,7 @@ import styles from "./../styles/CodeMirrorEditor.module.css";
 import React, {useEffect} from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import { Extension } from '@codemirror/state';
+import { EditorView } from "@codemirror/view";
 import {createTheme} from '@uiw/codemirror-themes';
 import {javascript} from '@codemirror/lang-javascript';
 import {tags as t} from '@lezer/highlight';
@@ -49,7 +50,7 @@ const myTheme: Extension = createTheme({
 	],
 });
 
-const extensions = [javascript({jsx: true})];
+const extensions = [javascript({jsx: true}), EditorView.lineWrapping];
 
 const CodeMirrorEditor: React.FC<CodeMirrorEditorProps> = ({fileName, onCodeChange, setVision}) => {
 	const [value, setValue] = React.useState('');

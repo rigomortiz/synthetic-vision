@@ -23,7 +23,7 @@ const vision = (p: p5, h: Hydra): void => {
   }
 
   p.draw = (): void => {
-    atommicBomb.draw(p);
+    atommicBomb.draw(p, h);
   }
 
   h.update = (): void => {

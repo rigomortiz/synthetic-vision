@@ -8,6 +8,9 @@ import {Fonts} from "../src/enums/Fonts";
 import NoiseEffect from "../src/effects/NoiseEffect";
 
 class MenuSV extends SyntheticVisionAbstract {
+    mouseMove(p: import("p5")): void {
+        throw new Error("Method not implemented.");
+    }
 	menu: Array<String> = this.generateRandomMenu();
 
 	selectedTextIndex = 0;
@@ -68,7 +71,7 @@ class MenuSV extends SyntheticVisionAbstract {
 		p.describe('A menu');
 	}
 
-	draw(p: p5): void {
+	draw(p: p5, h: Hydra): void {
 		p.clear()
 		this.drawTitle(p);
 		this.drawSubtitle(p);
