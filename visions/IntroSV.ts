@@ -17,6 +17,9 @@ import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 let controls: OrbitControls;
 
 class IntroSV extends SyntheticVisionAbstract {
+  mouseMove(p: import("p5")): void {
+      throw new Error("Method not implemented.");
+  }
   title: string = "Synthetic Vision";
   humanVisionSystemPromise: Promise<GLTF> | undefined;
   fontPromise: Promise<Font> | undefined;
@@ -104,7 +107,7 @@ class IntroSV extends SyntheticVisionAbstract {
     this.scene!.add(this.directionalLight);
   }
 
-  draw(p: p5): void {
+  draw(p: p5, h: Hydra): void {
     const time: number = performance.now() * 0.0003;
 
     this.camera!.position.x = 3 * Math.cos( time );

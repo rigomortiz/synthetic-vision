@@ -1,19 +1,19 @@
 .cm_theme {
-	position: absolute !important;
-	z-index: 2;
-	font-family: monospace;
-	font-size: 20px;
-	width: 33vw;
-	height: 90vh;
-	word-wrap: break-word;
-	cursor: none;
-	scrollbar-color: greenyellow black;
-	overflow-x: auto;
+  position: absolute !important;
+  z-index: 2;
+  font-family: monospace;
+  font-size: 14px;
+  width: 33vw;
+  height: 100vh;
+  word-wrap: break-word;
+  scrollbar-color: greenyellow black;
+  overflow-x: auto;
 }
 
 .cm_editor{
-	height: 90vh;
+	height: 100%;
 	cursor: auto;
+	overflow: auto;
 }
 
 .close_button {

@@ -51,11 +51,15 @@ const SyntheticVisionLiveCodingWrapper: React.FC<SyntheticVisionLiveCodingProps>
 
 		const p = new p5Module.default((p5Instance: p5) => {
 			p5Instance.preload = () => {
+				console.log("preload initialized");
 				syntheticVision.preload(p5Instance);
+				console.log("preload ended");
 			}
 
 			p5Instance.setup = () => {
+				console.log("Setup initialized");
 				syntheticVision.initialize(p5Instance, h);
+				console.log("Setup ended");
 				//alert('Press Play to start the animation');
 			}
 
@@ -65,12 +69,16 @@ const SyntheticVisionLiveCodingWrapper: React.FC<SyntheticVisionLiveCodingProps>
 			};
 
 			p5Instance.draw = () => {
-				syntheticVision.draw(p5Instance);
+				syntheticVision.draw(p5Instance, hydraInstance);
 			};
 
 			p5Instance.keyPressed = () => {
 				syntheticVision.keyPressed(p5Instance, h);
 			}
+
+			/*p5Instance.mouseMoved = () => {
+				syntheticVision.mouseMove(p5Instance);
+			}*/
 
 		}, p5Div.current!);
 
@@ -85,7 +93,7 @@ const SyntheticVisionLiveCodingWrapper: React.FC<SyntheticVisionLiveCodingProps>
 	}, [isMounted, initializeHydraAndP5, p5Instance, hydraInstance]);
 
 	useEffect(() => {
-		if (p5Instance && hydraInstance) {
+		if (p5Instance && hydraInstance && syntheticVision && liveCoding) {
 			try {
 				hydraInstance.update = () => {
 			        p5Instance.redraw();

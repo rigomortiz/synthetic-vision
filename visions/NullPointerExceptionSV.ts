@@ -7,6 +7,9 @@ import {Fonts} from "../src/enums/Fonts";
 import {NoSignalColors} from "../src/enums/Colors";
 
 class NullPointerExceptionSV extends SyntheticVisionAbstract {
+    mouseMove(p: import("p5")): void {
+        throw new Error("Method not implemented.");
+    }
 	title: string = "NullPointerException";
 	size: number = 100;
 
@@ -17,7 +20,7 @@ class NullPointerExceptionSV extends SyntheticVisionAbstract {
 		p.pixelDensity(1);
 	}
 
-	draw(p: p5): void {
+	draw(p: p5, h: Hydra): void {
 		p.clear();
 		p.lights();
 		p.orbitControl();

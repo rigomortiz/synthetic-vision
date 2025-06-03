@@ -6,6 +6,9 @@ import {NoSignalColors} from "../src/enums/Colors";
 import SyntheticVisionAbstract from "../src/SyntheticVisionAbstract";
 
 class LiveSV extends SyntheticVisionAbstract {
+  mouseMove(p: import("p5")): void {
+      throw new Error("Method not implemented.");
+  }
   title: string = "Synthetic Vision";
 
   constructor() {
@@ -19,7 +22,7 @@ class LiveSV extends SyntheticVisionAbstract {
     p.describe(this.title);
   }
 
-  draw(p: p5): void {
+  draw(p: p5, h: Hydra): void {
     p.clear();
     this.drawText(p);
     this.drawBionicEye(p);

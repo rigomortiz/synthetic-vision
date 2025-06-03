@@ -16,6 +16,9 @@ const COLORS = [
 ]
 
 class Jan9SV extends SyntheticVisionAbstract {
+    mouseMove(p: import("p5")): void {
+        throw new Error("Method not implemented.");
+    }
 	title: string = "A Init";
 
 
@@ -61,7 +64,7 @@ class Jan9SV extends SyntheticVisionAbstract {
 
     }
 
-	draw(p: p5): void {
+	draw(p: p5, h: Hydra): void {
 		p.clear()
 
 		let n = 6;

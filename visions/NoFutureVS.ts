@@ -7,6 +7,9 @@ import {Fonts} from "../src/enums/Fonts";
 import {BladeRunnerColors} from "../src/enums/Colors";
 
 class NoFutureVS extends SyntheticVisionAbstract {
+    mouseMove(p: import("p5")): void {
+        throw new Error("Method not implemented.");
+    }
 	explosionColor: p5.Color | undefined;
 	explosionRadius = 0;
 	explosionSpeed = 5;
@@ -27,7 +30,7 @@ class NoFutureVS extends SyntheticVisionAbstract {
 		this.explosionColor = p.color(255, 0, 0);
 	}
 
-	draw(p: import("p5")): void {
+	draw(p: p5, h: Hydra): void {
 		p.clear()
 		//p.lights();
 		p.orbitControl(3)
@@ -61,9 +64,9 @@ class NoFutureVS extends SyntheticVisionAbstract {
 		p.translate(0, 0, 200);
 
 		// dibuja una elipse con altura según el volumen
-		let h = p.map(level, 0, 1, p.height, 0);
+		let he = p.map(level, 0, 1, p.height, 0);
 		p.fill(255, 0, 0);
-		p.sphere(h);
+		p.sphere(he);
 
 		this.drawTextRandomly(p, "NO FUTURE", 0, 0);
 	}

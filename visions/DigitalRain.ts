@@ -12,6 +12,9 @@ import Waveform from "../src/animations/Waveform";
 import Sprectrum from "../src/animations/Spectrum";
 
 class DigitalRain extends SyntheticVisionAbstract {
+  mouseMove(p: import("p5")): void {
+      throw new Error("Method not implemented.");
+  }
   title: string = "Digital Rain";
   acidRain: AcidRain = new AcidRain()
   bits: BitRain3D[] = [];
@@ -30,7 +33,7 @@ class DigitalRain extends SyntheticVisionAbstract {
     }
   }
 
-  draw(p: p5): void {
+  draw(p: p5, h: Hydra): void {
     p.clear()
     //p.background(0, 0, 0, 150);
     let level = this.mic!.getLevel();

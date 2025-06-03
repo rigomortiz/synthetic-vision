@@ -4,6 +4,9 @@ import * as p5 from "p5";
 import Hydra from "hydra-synth";
 
 class Jan6SV extends SyntheticVisionAbstract {
+    mouseMove(p: import("p5")): void {
+        throw new Error("Method not implemented.");
+    }
 	title: string = "Make a landscape using only primitive shapes.";
 	text: [string, string, string, string] = [
 		"INTRODUCTION",
@@ -62,7 +65,7 @@ class Jan6SV extends SyntheticVisionAbstract {
 		this.semiMinorAxis = this.ellipseWidth / 2;
 	}
 
-	draw(p: p5): void {
+	draw(p: p5, h: Hydra): void {
 		p.clear();
 		p.background(0, 0, 0, 150);
 		p.orbitControl();

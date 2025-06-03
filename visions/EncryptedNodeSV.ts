@@ -8,6 +8,9 @@ import FontManager from "../src/managers/FontManager";
 import {FontPaths, Fonts} from "../src/enums/Fonts";
 
 class EncryptedNodeSV extends SyntheticVisionAbstract {
+    mouseMove(p: import("p5")): void {
+        throw new Error("Method not implemented.");
+    }
     title: string = "encrypted-node.py";
     particles: Nodes[] = [];
     nodes: number = 20;
@@ -27,7 +30,7 @@ class EncryptedNodeSV extends SyntheticVisionAbstract {
         this.handleContextLost(p);
     }
 
-    draw(p: p5): void {
+    draw(p: p5, h: Hydra): void {
         //p.clear();
         p.lights()
         p.orbitControl();

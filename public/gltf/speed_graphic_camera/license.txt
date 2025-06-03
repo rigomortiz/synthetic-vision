@@ -1,0 +1,8 @@
+Model Information:
+* title:	Speed Graphic Camera
+* source:	https://sketchfab.com/3d-models/speed-graphic-camera-9fc8d24cb5364406afcb95eaa78b7999
+* author:	Virtual Museums of Małopolska (https://sketchfab.com/WirtualneMuzeaMalopolski)
+
+Model License:
+* license type:	CC0-1.0 (http://creativecommons.org/publicdomain/zero/1.0/)
+* requirements:	Credit is not mandatory. Commercial use is allowed.

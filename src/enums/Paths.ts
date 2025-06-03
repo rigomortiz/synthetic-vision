@@ -15,5 +15,5 @@ export enum Paths {
 	EncryptedNode = '/audio/encrypted_node.wav',
 	NoFuture = '/audio/no-future.wav',
 	Malfunction = '/audio/Malfunction.mp3',
-	Noise = '/audio/Knife Podcast 197 _ SUMOF.mp3',
+	Noise = '/audio/opera.mp3',
 }

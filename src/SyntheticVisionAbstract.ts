@@ -33,10 +33,11 @@ abstract class SyntheticVisionAbstract {
 
   abstract preload(p: p5): void;
   abstract setup(p: p5, h: Hydra): void;
-  abstract draw(p: p5): void;
+  abstract draw(p: p5, h: Hydra): void;
   abstract hydra(h: Hydra, p: p5, active: boolean): void;
   abstract keyPressed(p: p5, h: Hydra): void;
   abstract onBackCanva: () => void;
+  abstract mouseMove(p: p5): void;
 
   private _renderer: THREE.WebGLRenderer | CSS3DRenderer | undefined;
   private _scene: THREE.Scene | undefined;
@@ -51,13 +52,17 @@ abstract class SyntheticVisionAbstract {
     this._threeActive = threeActive || false;
   }
 
+   preloadGlobals(p: p5): void {
+      FontManager.preloadFonts(p, FontPaths);
+      //ModelManager.preloadModels(p, ModelPaths);
+      //SoundManager.preloadSounds(p, SoundPaths);
+      this._fonts = FontManager.getFonts();
+      //this._models = ModelManager.getModels();
+      //this._sounds = SoundManager.getSounds();
+   }
+
   initialize(p: p5, h: Hydra): void {
-    FontManager.preloadFonts(p, FontPaths);
-    //ModelManager.preloadModels(p, ModelPaths);
-    SoundManager.preloadSounds(p, SoundPaths);
-    this._fonts = FontManager.getFonts();
-    //this._models = ModelManager.getModels();
-    this._sounds = SoundManager.getSounds();
+    this.preloadGlobals(p)
 
     this._canvas = p.createCanvas(window.innerWidth, window.innerHeight, this._typeRenderer);
     this._active = true;
@@ -86,9 +91,10 @@ abstract class SyntheticVisionAbstract {
       //his._controls.enableDamping = true;
     }
     h.bpm = 60
-   // p.noCursor();
+    // p.noCursor();
     p.colorMode(p.RGB);
     p.noLoop();
+    p.frameRate(60);
     this.initHydra(p, h);
     this.initMic(p);
     this.setup(p, h);

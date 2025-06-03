@@ -3,9 +3,11 @@
 	if (!sv.sound.isPlaying()) {
 		sv.sound.play();
 	}
-  sv.hide()
+  sv.show()
     p.draw = () => {
-		sv.shader.setUniform('u_mouse', [.7, .7]);
+		//sv.shader.setUniform('u_mouse', [.5, .5]);
+				sv.shader.setUniform('u_mouse', [sv.amplitude.getLevel(), sv.amplitude.getLevel()]);
+
 		p.push();
 		  p.imageMode(p.CENTER);
 		  p.image(
@@ -14,7 +16,7 @@
 		    0, 0, sv.video.width, sv.video.height,
 		    p.COVER
 		  );
-      p.filter(sv.shader);
+      p.filter(sv.shader);/*
 		  p.translate(0, 0, 0);
 		p.textFont(sv.font("Volunmo"));
 		p.textAlign(p.CENTER);
@@ -28,7 +30,7 @@
                ,0,-300);
       p.textSize(32);
       p.text("@bad_request & @rigomortiz"// +        sv.video.time()
-               ,0,300);
+               ,0,300);*/
 
     };
 
@@ -46,5 +48,10 @@
          sv.fft.waveform()[0])
         .out()
 
-    h.render(h.o0);
+    h.render(h.o1);
+
+	if (isEditorHovering) {
+            // Genera un evento en p5 cuando el mouse está en el editor
+            p.background(255, 0, 0); // Ejemplo: cambia el fondo a rojo
+          }
 }

@@ -27,7 +27,7 @@ class Node {
 		this.connected = connected
     }
 
-    draw(p: p5): void {
+    draw(p: p5, h: Hydra): void {
 	    if (this.connected) {
 			p.fill(COLORS.ORANGE);
 			p.stroke(10)
@@ -94,7 +94,7 @@ class Chip {
 		}
 	}
 
-	draw(p: p5): void {
+	draw(p: p5, h: Hydra): void {
 		p.fill(0, 0, 0, 10);
 		p.rect(this.x, this.y, this.size, this.size);
 
@@ -102,11 +102,11 @@ class Chip {
             p.fill(COLORS.LIGHT_GREEN);
 			p.stroke(10)
 			p.strokeWeight(2)
-            node.draw(p);
+            node.draw(p, h);
         }
 
 		for (let node of this.nodesOutput) {
-			node.draw(p);
+			node.draw(p, h);
         }
 
         for (let line of this.lines) {
@@ -133,6 +133,9 @@ class Chip {
 }
 
 class Jan5SV extends SyntheticVisionAbstract {
+    mouseMove(p: import("p5")): void {
+        throw new Error("Method not implemented.");
+    }
 	title: string = "Isometric Art (No vanishing points)."
 	chip1: Chip | undefined;
 	chip2: Chip | undefined;
@@ -154,11 +157,11 @@ class Jan5SV extends SyntheticVisionAbstract {
 	    this.chip2 = new Chip(p, centerX - 100, centerY - 100, size, 40, 5);
     }
 
-    draw(p: p5): void {
+    draw(p: p5, h: Hydra): void {
 		p.clear();
 		this.drawBackground(p);
-		this.chip1!.draw(p);
-        this.chip2!.draw(p);
+		this.chip1!.draw(p, h);
+        this.chip2!.draw(p, h);
 		this.drawNodes(p);
     }
 
