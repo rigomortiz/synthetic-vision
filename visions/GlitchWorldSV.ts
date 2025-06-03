@@ -8,6 +8,9 @@ import {NoSignalColors} from "../src/enums/Colors";
 import GlitchEffect from "../src/effects/GlitchEffect";
 
 class GlitchWorldSV extends SyntheticVisionAbstract {
+    mouseMove(p: import("p5")): void {
+        throw new Error("Method not implemented.");
+    }
 	title: string = "Glitch World";
 	bgImage!: p5.Image;
 	capture!: p5.Element;
@@ -63,7 +66,7 @@ class GlitchWorldSV extends SyntheticVisionAbstract {
 		p.pixelDensity(2);
 	}
 
-	draw(p: p5): void {
+	draw(p: p5, h: Hydra): void {
 		//p.background(0);
 		//p.clear();
 		p.lights();

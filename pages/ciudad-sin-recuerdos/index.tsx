@@ -14,6 +14,11 @@ import {setupBackMenuHandlers} from "../../src/handlers/BackMenuHandlers";
 import {handleKeyPress} from "../../src/handlers/KeyPressHandlers";
 import { SyntheticsVisions } from "../../src/enums/SyntheticsVisions";
 import {SyntheticVisionProps} from "../../components/SyntheticVisionWrapper";
+import OperaSV from "../../visions/ciudad-sin-recuerdos/OperaSV";
+import OperaScene1SV from "../../visions/ciudad-sin-recuerdos/opera/OperaScene1SV";
+import OperaScene2SV from "../../visions/ciudad-sin-recuerdos/opera/OperaScene2SV";
+import OperaScene3SV from "../../visions/ciudad-sin-recuerdos/opera/OperaScene3SV";
+import OperaScene4SV from "../../visions/ciudad-sin-recuerdos/opera/OperaScene4SV";
 
 const SyntheticVisionWrapper: ComponentType<SyntheticVisionProps> =
   dynamic((): Promise<any> => import('../../components/SyntheticVisionWrapper'), {ssr: false})
@@ -25,6 +30,11 @@ const sv = (p: p5, h: Hydra): void => {
   const svManager: SyntheticVisionManager = SyntheticVisionManager.getInstance();
 
   svManager.addItem(SyntheticsVisions.CiudadSinRecuerdos, new CiudadSinRecuerdosSV());
+  //svManager.addItem(SyntheticsVisions.Opera, new OperaSV());
+  //svManager.addItem(SyntheticsVisions.OperaScene1, new OperaScene1SV())
+  //svManager.addItem(SyntheticsVisions.OperaScene2, new OperaScene2SV())
+  //svManager.addItem(SyntheticsVisions.OperaScene3, new OperaScene3SV())
+  //svManager.addItem(SyntheticsVisions.OperaScene4, new OperaScene4SV())
 
   p.preload = (): void => {
     SyntheticVisionManager.preload(p);
@@ -47,7 +57,7 @@ const sv = (p: p5, h: Hydra): void => {
         transitionOpacity = 255;
       }
     } else {
-      drawActiveCanvas(p);
+      drawActiveCanvas(p, h);
     }
   };
 

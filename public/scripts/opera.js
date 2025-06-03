@@ -49,4 +49,9 @@
         .out()
 
     h.render(h.o1);
+
+	if (isEditorHovering) {
+            // Genera un evento en p5 cuando el mouse está en el editor
+            p.background(255, 0, 0); // Ejemplo: cambia el fondo a rojo
+          }
 }

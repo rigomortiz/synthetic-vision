@@ -4,6 +4,9 @@ import * as p5 from "p5";
 import Hydra from "hydra-synth";
 
 class Jan2SV extends SyntheticVisionAbstract {
+    mouseMove(p: import("p5")): void {
+        throw new Error("Method not implemented.");
+    }
 	constructor() {
 		super(true, "webgl");
 	}
@@ -15,7 +18,7 @@ class Jan2SV extends SyntheticVisionAbstract {
 		p.describe('Layers upon layers upon layers.');
     }
 
-    draw(p: p5): void {
+    draw(p: p5, h: Hydra): void {
 		p.clear();
         p.orbitControl();
         let x = p.random(-p.width / 2, p.width / 2);

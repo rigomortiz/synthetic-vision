@@ -4,6 +4,9 @@ import * as p5 from "p5";
 import Hydra from "hydra-synth";
 
 class Jan10SV extends SyntheticVisionAbstract {
+    mouseMove(p: import("p5")): void {
+        throw new Error("Method not implemented.");
+    }
 	title: string = "You can only use TAU in your code, no other number allowed."
 
 	constructor() {
@@ -18,7 +21,7 @@ class Jan10SV extends SyntheticVisionAbstract {
 		p.noStroke()
 	}
 
-	draw(p: p5): void {
+	draw(p: p5, h: Hydra): void {
 		p.clear()
 		p.orbitControl()
 		p.lights();

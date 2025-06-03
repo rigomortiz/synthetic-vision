@@ -4,6 +4,9 @@ import p5 from "p5";
 import Hydra from "hydra-synth";
 
 class Jan1SV extends SyntheticVisionAbstract {
+    mouseMove(p: import("p5")): void {
+        throw new Error("Method not implemented.");
+    }
 	constructor() {
 		super(true, "webgl");
 	}
@@ -16,7 +19,7 @@ class Jan1SV extends SyntheticVisionAbstract {
 		p.pixelDensity(2)
     }
 
-    draw(p: p5): void {
+    draw(p: p5, h: Hydra): void {
 		let numLines = 10;
 		p.clear()
         p.orbitControl();

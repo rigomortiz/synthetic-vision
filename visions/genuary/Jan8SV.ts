@@ -59,6 +59,9 @@ class Drop {
 }
 
 class Jan8SV extends SyntheticVisionAbstract {
+    mouseMove(p: import("p5")): void {
+        throw new Error("Method not implemented.");
+    }
 	title: string = "Draw one million of something."
 	drops: Drop[] = [];
 	dollar: p5.Image[] = [];
@@ -86,7 +89,7 @@ class Jan8SV extends SyntheticVisionAbstract {
 		this.hide();
 	}
 
-	draw(p: p5): void {
+	draw(p: p5, h: Hydra): void {
 		p.clear()
 
 		for (let i = 0; i < this.drops.length; i++) {

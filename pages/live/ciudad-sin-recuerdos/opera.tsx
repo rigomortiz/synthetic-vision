@@ -16,7 +16,7 @@ const SyntheticVisionLiveCodingWrapper: ComponentType<SyntheticVisionLiveCodingP
 	})
 
 const sv: OperaSV = new OperaSV()
-const fileName = 'opera.js';
+const fileName = 'opera-original.js';
 
 export default function Home(): JSX.Element {
 	const [code, setCode] = useState("");

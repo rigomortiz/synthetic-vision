@@ -2,6 +2,8 @@ import * as p5 from "p5";
 import FontManager from "../managers/FontManager";
 import { Fonts } from "../enums/Fonts";
 import SyntheticVisionManager from "../managers/SyntheticVisionManager";
+// @ts-ignore
+import Hydra from "hydra-synth";
 
 export function drawTransition(p: p5, transitionOpacity: number) {
   p.clear()
@@ -18,8 +20,8 @@ export function drawTransition(p: p5, transitionOpacity: number) {
   return transitionOpacity - 3;
 }
 
-export function drawActiveCanvas(p: p5) {
+export function drawActiveCanvas(p: p5, h: Hydra) {
   for (let [key, syntheticVision] of SyntheticVisionManager.getInstance().getAllItems())
     if (syntheticVision.active)
-      syntheticVision.draw(p);
+      syntheticVision.draw(p, h);
 }

@@ -23,7 +23,7 @@ const vision = (p: p5, h: Hydra): void => {
   }
 
   p.draw = (): void => {
-    glitchWorld.draw(p);
+    glitchWorld.draw(p, h);
   }
 
   h.update = (): void => {

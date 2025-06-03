@@ -47,7 +47,7 @@ const sv = (p: p5, h: Hydra): void => {
         transitionOpacity = 255;
       }
     } else {
-      drawActiveCanvas(p);
+      drawActiveCanvas(p, h);
     }
   };
 
