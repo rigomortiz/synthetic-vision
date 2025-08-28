@@ -2,6 +2,8 @@ import React, {RefObject, useEffect, useRef, useState} from "react";
 import p5 from "p5";
 // @ts-ignore
 import Hydra from "hydra-synth";
+import AudioComponent from "./AudioComponent";
+
 
 export interface SyntheticVisionProps {
 	vision: (p: p5, h: Hydra) => void;

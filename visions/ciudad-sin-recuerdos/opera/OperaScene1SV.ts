@@ -11,10 +11,18 @@ class OperaScene1SV extends SyntheticVisionAbstract {
 	videosSrc: string[] = ["/video/opera.mp4", "/video/opera-2.mp4", "/video/opera-3.mp4"];
 	audio: p5.SoundFile | undefined;
 	shader: p5.Shader | undefined;
-	text = "Abrí los ojos y pude ver la realidad, unas luces incandescentes iluminaban unos barrotes." +
-		"Uno a uno pasaban frente de mí, me sentía inmerso en un hipercubo." +
-		"EL brillo de la luz me destellaban a los ojos, mis pupilas se dilataban cómo en el efecto de una droga sintética." +
-		"La imagen era más nítida, era como si estuviera viendo a través de un caleidoscopio, era el antiguo teatro de la ciudad.";
+	text =
+		"Abrí los ojos y el sistema se instaló dentro de mi.Unas luces incandescentes iluminaban unos barrotes." +
+		"Uno a uno pasaban frente de mí,\n me sentía perdido en la realidad." +
+		"El brillo de la luz me destellaba a los ojos,\n mis pupilas se dilataban cómo en el efecto de una droga cibernética." +
+		"La imagen era más nítida, era como si estuviera viendo a través de un espejo roto,\n era el antiguo teatro de la ciudad." +
+		"<<Mi aleción se desvanece como un recuerdo añejo>>\n" +
+		"El teatro Ópera, un lugar que había sido testigo de innumerables fracasos" +
+		"El sonido de la música rechina en mis oídos, era como si estuviera escuchando una sinfonía de emociones." +
+		"El escenario estaba vacío, pero podía sentir la presencia de los artistas que habían estado allí antes." +
+		"El olor a polvo y humedad llenaba el aire, era como si el tiempo se hubiera detenido en ese lugar." +
+		"Me sentía atrapado en un ciclo interminable de recuerdos y emociones, como si estuviera viviendo una pesadilla." +
+		"Pero a pesar de todo, había algo hermoso en esa oscuridad, algo que me hacía sentir vivo.";
 
 	statements: string[] = this.text.split(".");
 	currentWordIndex = 0;
@@ -68,8 +76,7 @@ class OperaScene1SV extends SyntheticVisionAbstract {
 		p.textFont(this.font("Volunmo"));
 		p.textSize(300);
 		p.fill(255);
-		p.text("Scene 1"// +        sv.video.time()
-		,0,0);
+		p.text("despertar",0,0);
 		p.textSize(46);
 		p.textFont(this.font("Terminus"));
 		p.text("ÓPERA"// +        sv.video.time()
@@ -87,7 +94,7 @@ class OperaScene1SV extends SyntheticVisionAbstract {
 
 
 		const currentStatement = this.statements[this.currentWordIndex];
-		this.duration = Math.ceil(currentStatement.split(" ").length * this.secondsPerWord * h.bpm/5);
+		this.duration = Math.ceil(currentStatement.split(" ").length * this.secondsPerWord * h.bpm/3);
 		const elapsedSeconds = Math.floor(p.millis() / 1000);
 
 		if (this.timer === this.duration) {

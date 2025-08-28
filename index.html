@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cyberpunk Soundscape</title>
+  <script src="https://cdn.jsdelivr.net/npm/tone@15.1.22/build/esm/index.js"></script>
+</head>
+<body>
+  <button onclick="startSound()">Iniciar Paisaje Sonoro</button>
+
+  <script>
+    async function startSound() {
+      await Tone.start(); // Necesario por políticas de autoplay
+
+      // 🔊 Oscilador base (pad oscuro)
+      const pad = new Tone.Oscillator("A1", "sine").toDestination();
+      const filter = new Tone.Filter(400, "lowpass").toDestination();
+      const reverb = new Tone.Reverb({ decay: 8, wet: 0.7 }).toDestination();
+
+      pad.connect(filter);
+      filter.connect(reverb);
+
+      pad.volume.value = -12;
+      pad.start();
+
+      // 🎛️ LFO para modular el filtro (efecto de pulsación)
+      const lfo = new Tone.LFO("0.1hz", 200, 600).start();
+      lfo.connect(filter.frequency);
+
+      // ⚡ Glitch aleatorio (ruido breve con distorsión)
+      const noise = new Tone.Noise("pink").start();
+      const noiseVol = new Tone.Volume(-30).toDestination();
+      const dist = new Tone.Distortion(0.8).toDestination();
+      noise.connect(dist).connect(noiseVol);
+
+      // Eventualmente dispara glitches
+      const glitchLoop = new Tone.Loop(() => {
+        const duration = Math.random() * 0.2 + 0.1;
+        noise.start("+0.1").stop("+" + duration);
+      }, "1.5s").start(0);
+
+      // ♾️ Loop de tono mecánico cada 8 segundos
+      const drone = new Tone.MembraneSynth().toDestination();
+      const seq = new Tone.Loop(time => {
+        drone.triggerAttackRelease("C1", "1s", time);
+      }, "8s").start(0);
+
+      Tone.Transport.start();
+    }
+  </script>
+</body>
+</html>

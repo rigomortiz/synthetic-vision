@@ -24,6 +24,40 @@ class NoiseEffect{
             envelope.dispose();
         }, 500);
         */
+        const synth = new Tone.Synth({
+            oscillator: {
+                type: "sawtooth"
+            },
+            envelope: {
+                attack: 0.01,
+                decay: 0.2,
+                sustain: 0.5,
+                release: 1
+            }
+        }).toDestination();
+
+        const filter = new Tone.Filter({
+            type: "lowpass",
+            frequency: 800,
+            rolloff: -24,
+            Q: 15
+        }).toDestination();
+
+        synth.connect(filter);
+
+        const notes = ["E2", "G2", "A2", "B2", "D3", "E3", "G3", "A3", "B3", "D4", "E4", "G4", "A4", "B4", "D5", "E5"];
+        const melody = new Tone.Sequence(
+            (time, note) => {
+                synth.triggerAttackRelease(note, "8n", time);
+            },
+            notes,
+            "4n"
+        );
+
+        Tone.Transport.bpm.value = 190; // Set the tempo
+        melody.start(0);
+        Tone.Transport.start();
+        Tone.Transport.start();
     }
 
     static rectNoise(p: p5, x: number, y: number, staticSize:number): void {

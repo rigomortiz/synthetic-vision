@@ -1,4 +1,5 @@
 import styles from "../../../styles/Gallery.module.css";
+import { useUrl } from 'nextjs-current-url';
 import dynamic from "next/dynamic";
 import {ComponentType} from "react";
 import React from "react";
@@ -72,6 +73,7 @@ const sv = (p: p5, h: Hydra): void => {
 
 }
 export default function Page(): JSX.Element  {
+  const { pathname, href } = useUrl() ?? {};
   return (
     <div>
       <main className={styles.main}>
