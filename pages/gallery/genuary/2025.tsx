@@ -52,7 +52,7 @@ const Gallery: React.FC = (): JSX.Element => {
         new Data("JAN. 30.", "Melissa Wiederrecht", "Abstract map."),
         new Data("JAN. 31.", "Melissa Wiederrecht", "Pixel sorting."),
     ];
-  const days: number[] = Array.from({ length: 12 }, (_: unknown, i: number): number => i);
+  const days: number[] = Array.from({ length: 13 }, (_: unknown, i: number): number => i);
 
     const handleClick: (num: number) => void = (num: number): void => {
         const url: string = "/live/genuary/jan-" + twoDigit(num);
