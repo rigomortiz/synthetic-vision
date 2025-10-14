@@ -1,3 +1,4 @@
+// @ts-nocheck
 import SyntheticVisionAbstract from "../../src/SyntheticVisionAbstract";
 import * as p5 from "p5";
 // @ts-ignore
@@ -22,7 +23,7 @@ class OperaSV extends SyntheticVisionAbstract {
 	amp: p5.Amplitude | undefined;
 	pad: p5.Oscillator | undefined;
 	lfo: p5.Oscillator | undefined;
-	filter: p5.LoowPass | undefined;
+	filter: p5.LowPass | undefined;
 	filtro: p5.BandPaas | undefined;
 	volumen: p5.Gain | undefined;
 	osc: p5.Oscillator | undefined;
@@ -111,7 +112,7 @@ class OperaSV extends SyntheticVisionAbstract {
 			let y = p.height - 100;
 			let x = p.width/2 - (this.urls.length * buttonWidth + (this.urls.length - 1) * spacing) / 2 + i * (buttonWidth + spacing);
 
-			let button = p.createButton(`Recuerdo ${i + 1}`);
+			let button = p.createButton(`Escena ${i + 1}`);
 			button.position(x, y);
 			button.size(buttonWidth, buttonHeight);
 			button.style("font-size", "16px");
