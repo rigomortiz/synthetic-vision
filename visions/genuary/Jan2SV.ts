@@ -20,7 +20,7 @@ class Jan2SV extends SyntheticVisionAbstract {
 
     draw(p: p5, h: Hydra): void {
 		p.clear();
-        p.orbitControl();
+        p.orbitControl(0.1);
         let x = p.random(-p.width / 2, p.width / 2);
         let y = p.random(-p.height / 2, p.height / 2);
         let z = p.random(-500, 500);

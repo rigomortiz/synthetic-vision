@@ -23,7 +23,7 @@ class Jan10SV extends SyntheticVisionAbstract {
 
 	draw(p: p5, h: Hydra): void {
 		p.clear()
-		p.orbitControl()
+		p.orbitControl(0.1)
 		p.lights();
 		for(let j: number = 0; j < p.TAU; j += p.TAU / 10) {
 			let c: number = p.map(j, 0, p.TAU - j, 0, 255);

@@ -12,8 +12,10 @@ html,
 body {
 	padding: 0;
 	margin: 0;
-	background-color: black;
-	font-family: 'Terminus', sans-serif; /* Fuente predeterminada */
+	background-color: white;
+	font-family: 'Terminus', sans-serif;
+    height: -webkit-fill-available;
+    scrollbar-width: none;
 }
 
 .p5Canvas {

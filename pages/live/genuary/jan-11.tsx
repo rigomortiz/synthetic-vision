@@ -7,7 +7,7 @@ import p5 from "p5";
 // @ts-ignore
 import Hydra from "hydra-synth";
 import SyntheticVisionAbstract from "../../../src/SyntheticVisionAbstract";
-import LiveSV from "../../../visions/LiveSV";
+import IntroSV from "../../../visions/IntroSV";
 
 
 const SyntheticVisionLiveCodingWrapper: ComponentType<SyntheticVisionLiveCodingProps> =
@@ -15,7 +15,7 @@ const SyntheticVisionLiveCodingWrapper: ComponentType<SyntheticVisionLiveCodingP
 		ssr: false
 	})
 
-const syntheticVision: LiveSV = new LiveSV()
+const syntheticVision: IntroSV = new IntroSV()
 const fileName = 'intro.js';
 
 export default function Home(): JSX.Element {

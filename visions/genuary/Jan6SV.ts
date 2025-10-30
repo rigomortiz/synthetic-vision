@@ -68,7 +68,7 @@ class Jan6SV extends SyntheticVisionAbstract {
 	draw(p: p5, h: Hydra): void {
 		p.clear();
 		p.background(0, 0, 0, 150);
-		p.orbitControl();
+		p.orbitControl(0.1);
 		this.drawText(p, this.text, 0, 0);
 		p.rotateY(p.millis() * 0.01);
 		p.rotateX(p.millis() * 0.01)

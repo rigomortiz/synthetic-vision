@@ -33,14 +33,14 @@ const SyntheticVisionLiveCodingWrapper: React.FC<SyntheticVisionLiveCodingProps>
 
 		const h: any = new Hydra({
 			canvas: p5Div.current!.getElementsByTagName("canvas")[0],
-			width: window.innerWidth - 20,
-			height: window.innerHeight - 20,
+			width: window.innerWidth,
+			height: window.innerHeight - 10,
 			makeGlobal: false,
 			detectAudio: false,
 			precision: "highp",
 			autoLoop: true,
-			numSources: 4,
-			numOutputs: 4,
+			numSources: 5,
+			numOutputs: 5,
 		}).synth;
 
 

@@ -22,7 +22,7 @@ class Jan1SV extends SyntheticVisionAbstract {
     draw(p: p5, h: Hydra): void {
 		let numLines = 10;
 		p.clear()
-        p.orbitControl();
+        p.orbitControl(0.1);
 		p.fill(255);
 		p.stroke(255);
 		p.strokeWeight(1);

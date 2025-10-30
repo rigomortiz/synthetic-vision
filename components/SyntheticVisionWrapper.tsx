@@ -35,14 +35,14 @@ const SyntheticVisionWrapper: React.FC<SyntheticVisionProps> = ({vision}: Synthe
 
 		const hydraInstance = new Hydra({
 			canvas: p5Canvas,
-			width: window.innerWidth - 20,
-			height: window.innerHeight - 20,
+			width: window.innerWidth,
+			height: window.innerHeight - 10,
 			makeGlobal: false,
 			detectAudio: false,
 			precision: "highp",
 			autoLoop: true,
-			numSources: 4,
-			numOutputs: 4,
+			numSources: 5,
+			numOutputs: 5,
 		}).synth;
 
 		const initP5 = async () => {
